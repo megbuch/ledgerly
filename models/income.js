@@ -25,6 +25,10 @@ const incomeSchema = new Schema({
     },
     notes: {
         type: String,
+    },
+    user: {
+        type: Schema.Types.ObjectId,
+        ref: "User",
     }
 }, {
     timestamps: true,
