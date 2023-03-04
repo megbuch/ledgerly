@@ -1,0 +1,38 @@
+@import url('https://fonts.googleapis.com/css2?family=Berkshire+Swash&display=swap');
+
+.Navigation > a {
+    color: white;
+}
+
+.Navigation > a:hover {
+    color:#d9ff7f;
+}
+
+nav {
+    display: flex;
+    flex-direction: column;
+    gap: 15em;
+    height: 100vh;
+    width: 15em;
+    margin: 0;
+    text-align: right;
+    padding: 1em;
+    background-color: rgb(41, 41, 41);
+    color: white;
+}
+
+.Navigation {
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
+}
+
+.Navigation > h1, .Navigation > p {
+    text-align: center;
+    margin: 0;
+}
+
+.Navigation > h1 {
+    color: #d9ff7f;
+    font: 3rem 'Berkshire Swash', 'Poppins', Helvetica, Arial, sans-serif;
+}
