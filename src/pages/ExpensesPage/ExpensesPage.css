@@ -1,0 +1,4 @@
+.ExpensesPage {
+    display: flex;
+    flex-direction: column;
+}
