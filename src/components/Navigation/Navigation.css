@@ -13,7 +13,7 @@ nav {
     flex-direction: column;
     gap: 15em;
     height: 100vh;
-    width: 15em;
+    width: 18em;
     margin: 0;
     text-align: right;
     padding: 1em;
@@ -27,7 +27,7 @@ nav {
     gap: 1em;
 }
 
-.Navigation > h1, .Navigation > p {
+.Navigation > h1, .Navigation > h3, .Navigation > h4, .Navigation > p {
     text-align: center;
     margin: 0;
 }
@@ -35,4 +35,14 @@ nav {
 .Navigation > h1 {
     color: #d9ff7f;
     font: 3rem 'Berkshire Swash', 'Poppins', Helvetica, Arial, sans-serif;
+}
+
+.Navigation > h3 {
+    font-size: 1em;
+    font-weight: 300;
+}
+
+hr {
+    width: 100%;
+    border: 1px solid rgb(75, 75, 75);
 }

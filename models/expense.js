@@ -1,37 +1,56 @@
-const mongoose = require('mongoose');
+const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
-const expenseSchema = new Schema({
+const expenseSchema = new Schema(
+  {
     description: {
-        type: String, 
-        required: true,
+      type: String,
+      required: true,
     },
     amount: {
-        type: Number,
-        required: true,
+      type: Number,
+      required: true,
     },
     category: {
-        type: String,
-        enum: [],
-        required: true,
+      type: String,
+      enum: [
+        "Accounting Fees",
+        "Advertising & Promotion",
+        "Computer Expense",
+        "Depreciation Expense",
+        "Interest Expense",
+        "Meals & Entertainment",
+        "Office Supplies",
+        "Payroll Expense",
+        "Professional Fees",
+        "Rent Expense",
+        "Repairs & Maintenance",
+        "Telephone",
+        "Travel Expense",
+        "Utilities",
+        "Vehicle Expense",
+      ],
+      required: true,
     },
     account: {
-        type: String,
-        enum: ['Checking', 'Savings', 'Credit Card', 'Cash'],
+      type: String,
+      enum: ["Checking", "Savings", "Credit Card", "Cash"],
     },
     date: {
-        type: Date,
-        required: true,
+      type: Date,
+      required: true,
     },
     notes: {
-        type: String,
+      type: String,
     },
     user: {
-        type: Schema.Types.ObjectId,
-        ref: "User",
-    }
-}, {
+      type: Schema.Types.ObjectId,
+      ref: "User",
+    },
+  },
+  {
     timestamps: true,
-})
+  }
+);
 
-module.exports = mongoose.model('Expense', expenseSchema);
+module.exports = mongoose.model("Expense", expenseSchema);
