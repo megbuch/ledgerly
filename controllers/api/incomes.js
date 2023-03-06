@@ -1,15 +1,8 @@
-const jwt = require("jsonwebtoken");
 const Income = require("../../models/income");
 
 module.exports = { create };
 
 async function create(req, res) {
-  const token = req.headers.authorization.split(" ")[1];
-  const decoded = jwt.verify(token, process.env.SECRET);
-  const userId = decoded.user._id;
-
-  console.log(userId);
-
   const income = new Income({
     description: req.body.description,
     amount: req.body.amount,
@@ -17,7 +10,7 @@ async function create(req, res) {
     account: req.body.account,
     date: req.body.date,
     notes: req.body.notes,
-    user: userId,
+    user: req.user._id
   });
 
   try {

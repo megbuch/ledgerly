@@ -1,40 +1,40 @@
-const mongoose = require('mongoose');
+const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
-const incomeSchema = new Schema({
+const incomeSchema = new Schema(
+  {
     description: {
-        type: String, 
-        required: true,
+      type: String,
+      required: true,
     },
     amount: {
-        type: Number,
-        required: true,
+      type: Number,
+      required: true,
     },
     category: {
-        type: String,
-        enum: [
-            'Sales',
-            'Uncategorized Income'
-        ],
-        required: true,
+      type: String,
+      enum: ["Sales", "Uncategorized Income"],
+      required: true,
     },
     account: {
-        type: String,
-        enum: ['Checking', 'Savings', 'Credit Card', 'Cash'],
+      type: String,
+      enum: ["Checking", "Savings", "Credit Card", "Cash"],
     },
     date: {
-        type: Date,
-        required: true,
+      type: Date,
+      required: true,
     },
     notes: {
-        type: String,
+      type: String,
     },
     user: {
-        type: Schema.Types.ObjectId,
-        ref: "User",
-    }
-}, {
+      type: Schema.Types.ObjectId,
+      ref: "User",
+    },
+  },
+  {
     timestamps: true,
-})
+  }
+);
 
-module.exports = mongoose.model('Income', incomeSchema);
+module.exports = mongoose.model("Income", incomeSchema);
