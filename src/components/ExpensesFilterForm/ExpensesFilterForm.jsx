@@ -31,17 +31,9 @@ export default function FilterForm() {
           ))}
         </select>
         <label htmlFor="date">Start Date</label>
-        <input
-          type="date"
-          id="date"
-          name="date"
-        />
+        <input type="date" id="date" name="date" />
         <label htmlFor="date">End Date</label>
-        <input
-          type="date"
-          id="date"
-          name="date"
-        />
+        <input type="date" id="date" name="date" />
       </form>
     </>
   );

@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const incomeCtrl = require('../../controllers/api/incomes');
+const incomeCtrl = require('../../controllers/api/income');
 const ensureLoggedIn = require('../../config/ensureLoggedIn');
 
 router.post('/', ensureLoggedIn, incomeCtrl.create);

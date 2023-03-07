@@ -1,7 +1,7 @@
 import ExpenseForm from "../../components/ExpenseForm/ExpenseForm";
 import ExpensesList from "../../components/ExpensesList/ExpensesList";
-import ExpensesFilterForm from "../../components/ExpensesFilterForm/ExpensesFilterForm"
-import './ExpensesPage.css'
+import ExpensesFilterForm from "../../components/ExpensesFilterForm/ExpensesFilterForm";
+import './ExpensesPage.css';
 
 export default function ExpensesPage() {
   return (
