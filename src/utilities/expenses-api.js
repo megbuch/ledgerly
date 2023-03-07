@@ -4,3 +4,7 @@ const BASE_URL = "/api/expenses";
 export async function createExpense(expenseFormData) {
   return await sendRequest(`${BASE_URL}`, "POST", expenseFormData);
 }
+
+export async function getExpenses() {
+  return await sendRequest(`${BASE_URL}`, "GET");
+}

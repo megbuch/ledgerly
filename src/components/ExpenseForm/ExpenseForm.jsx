@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import * as expensesAPI from "../../utilities/expenses-api";
 
 export default function ExpenseForm() {

@@ -1,6 +1,9 @@
 const Expense = require("../../models/expense");
 
-module.exports = { create };
+module.exports = {
+  create,
+  index,
+};
 
 async function create(req, res) {
   const expense = new Expense({
@@ -12,11 +15,22 @@ async function create(req, res) {
     notes: req.body.notes,
     user: req.user._id
   });
-
   try {
     const savedExpense = await expense.save();
     res.json(savedExpense);
   } catch (err) {
-    res.status(400).json(err);
+    res.status(400).json({ error: "Error submitting expense form." });
+  }
+}
+
+async function index(req, res) {
+  try {
+    const expenses = await Expense
+      .find({ user: req.user._id })
+      .sort({date: -1});
+    res.json(expenses);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: "Internal Server Error: Failed to retrieve list of expenses." });
   }
 }
