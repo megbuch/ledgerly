@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import * as expensesAPI from "../../utilities/expenses-api";
 
-export default function ExpensesList({ addExpense }) {
+export default function ExpensesList() {
   const [expenses, setExpenses] = useState([]);
 
   useEffect(() => {
@@ -31,6 +31,7 @@ export default function ExpensesList({ addExpense }) {
             <p>{expense.category}</p>
             <p>{expense.account}</p>
             <p>{expense.notes}</p>
+            <button>x</button>
           </div>
         ))}
       </ul>

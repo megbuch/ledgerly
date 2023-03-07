@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import * as incomeAPI from "../../utilities/income-api";
+import * as incomesAPI from "../../utilities/incomes-api";
 
 export default function IncomeForm() {
   const [incomeFormData, setIncomeFormData] = useState({
@@ -21,7 +21,7 @@ export default function IncomeForm() {
   const handleSubmit = async (event) => {
     event.preventDefault();
     try {
-      const income = await incomeAPI.createIncome(incomeFormData);
+      const income = await incomesAPI.createIncome(incomeFormData);
       console.log("Income saved:", income);
     } catch (err) {
       console.error("Error saving income:", err);

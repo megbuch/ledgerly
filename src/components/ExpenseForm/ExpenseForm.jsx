@@ -1,7 +1,7 @@
 import { useState } from "react";
 import * as expensesAPI from "../../utilities/expenses-api";
 
-export default function ExpenseForm() {
+export default function ExpenseForm({ setExpenses }) {
   const [expenseFormData, setExpenseFormData] = useState({
     description: "",
     amount: "",

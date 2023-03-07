@@ -5,7 +5,7 @@ import { getUser } from "../../utilities/users-service";
 import AuthPage from "../AuthPage/AuthPage";
 import DashboardPage from "../DashboardPage/DashboardPage";
 import TransactionsPage from "../TransactionsPage/TransactionsPage";
-import IncomePage from "../IncomePage/IncomePage";
+import IncomesPage from "../IncomesPage/IncomesPage";
 import ExpensesPage from "../ExpensesPage/ExpensesPage";
 import Navigation from "../../components/Navigation/Navigation";
 
@@ -20,7 +20,7 @@ export default function App() {
           <Routes className="Routes">
             <Route path="/" element={<DashboardPage />} />
             <Route path="/transactions" element={<TransactionsPage />} />
-            <Route path="/income" element={<IncomePage />} />
+            <Route path="/income" element={<IncomesPage />} />
             <Route path="/expenses" element={<ExpensesPage />} />
           </Routes>
         </>
