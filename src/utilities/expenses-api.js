@@ -8,3 +8,7 @@ export async function createExpense(expenseFormData) {
 export async function getExpenses() {
   return await sendRequest(`${BASE_URL}`, "GET");
 }
+
+export async function deleteExpense(expenseId) {
+  return await sendRequest(`${BASE_URL}/${expenseId}`, "DELETE");
+}

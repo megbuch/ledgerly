@@ -23,7 +23,7 @@ export default function IncomeForm({ addIncome }) {
     try {
       const income = await incomesAPI.createIncome(incomeFormData);
       console.log("Income saved:", income);
-      addIncome(income); // Call the addExpense function with the newly created expense
+      addIncome(income);
       setIncomeFormData({
         description: "",
         amount: "",

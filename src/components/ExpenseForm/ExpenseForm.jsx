@@ -23,7 +23,7 @@ export default function ExpenseForm({ addExpense }) {
     try {
       const expense = await expensesAPI.createExpense(expenseFormData);
       console.log("Expense saved:", expense);
-      addExpense(expense); // Call the addExpense function with the newly created expense
+      addExpense(expense);
       setExpenseFormData({
         description: "",
         amount: "",
@@ -31,7 +31,7 @@ export default function ExpenseForm({ addExpense }) {
         account: "",
         date: "",
         notes: "",
-      }); // Reset the form
+      });
     } catch (err) {
       console.error("Error saving expense:", err);
     }
