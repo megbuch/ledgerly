@@ -1,15 +1,47 @@
+import { useState, useEffect } from "react";
+import * as expensesAPI from "../../utilities/expenses-api";
 import ExpenseForm from "../../components/ExpenseForm/ExpenseForm";
-import ExpensesList from "../../components/ExpensesList/ExpensesList";
 import ExpensesFilterForm from "../../components/ExpensesFilterForm/ExpensesFilterForm";
 import './ExpensesPage.css';
 
 export default function ExpensesPage() {
+  const [expenses, setExpenses] = useState([]);
+
+  useEffect(() => {
+    async function fetchExpenses() {
+      try {
+        const data = await expensesAPI.getExpenses();
+        setExpenses(data);
+      } catch (error) {
+        console.error(error);
+      }
+    }
+
+    fetchExpenses();
+  }, []);
+
   return (
     <div className="ExpensesPage">
       <h1>Expenses</h1>
       <ExpenseForm />
       <ExpensesFilterForm />
-      <ExpensesList />
+       <div>
+      <h3>Your Expenses</h3>
+      <ul>
+        {expenses.map((expense) => (
+          <div key={expense._id} className="card">
+            <p><strong>{expense.description}</strong>
+              <span>${expense.amount}</span>
+            </p>
+            <p>{new Date(expense.date).toLocaleDateString()}</p>
+            <p>{expense.category}</p>
+            <p>{expense.account}</p>
+            <p>{expense.notes}</p>
+            <button>x</button>
+          </div>
+        ))}
+      </ul>
+    </div>
     </div>
   );
 }
