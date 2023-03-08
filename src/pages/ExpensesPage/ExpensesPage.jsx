@@ -58,7 +58,9 @@ export default function ExpensesPage() {
               <p>{expense.category}</p>
               <p>{expense.account}</p>
               <p>{expense.notes}</p>
-              <button onClick={() => handleDelete(expense._id)}>x</button>
+              <button onClick={() => handleDelete(expense._id)}>
+                <i class="fa-solid fa-trash"></i>
+              </button>
             </div>
           ))}
         </ul>

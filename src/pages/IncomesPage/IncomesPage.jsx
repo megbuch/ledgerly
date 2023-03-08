@@ -43,25 +43,28 @@ export default function IncomesPage() {
   return (
     <div className="IncomePage">
       <h1>Income</h1>
-      <IncomeForm addIncome={addIncome}/>
+      <IncomeForm addIncome={addIncome} />
       <IncomesFilterForm />
       <div>
-      <h3>Your Income</h3>
-      <ul>
-        {incomes.map((income) => (
-          <div key={income._id} className="card">
-            <p><strong>{income.description}</strong>
-              <span>${income.amount}</span>
-            </p>
-            <p>{new Date(income.date).toLocaleDateString()}</p>
-            <p>{income.category}</p>
-            <p>{income.account}</p>
-            <p>{income.notes}</p>
-            <button onClick={() => handleDelete(income._id)}>x</button>
-          </div>
-        ))}
-      </ul>
-    </div>
+        <h3>Your Income</h3>
+        <ul>
+          {incomes.map((income) => (
+            <div key={income._id} className="card">
+              <p>
+                <strong>{income.description}</strong>
+                <span>${income.amount}</span>
+              </p>
+              <p>{new Date(income.date).toLocaleDateString()}</p>
+              <p>{income.category}</p>
+              <p>{income.account}</p>
+              <p>{income.notes}</p>
+              <button onClick={() => handleDelete(income._id)}>
+                <i class="fa-solid fa-trash"></i>
+              </button>
+            </div>
+          ))}
+        </ul>
+      </div>
     </div>
   );
 }
