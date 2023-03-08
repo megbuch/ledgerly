@@ -1,10 +1,10 @@
-import IncomeForm from "../../components/IncomeForm/IncomeForm";
-import IncomesFilterForm from "../../components/IncomesFilterForm/IncomesFilterForm";
 import { useState, useEffect } from "react";
 import * as incomesAPI from "../../utilities/incomes-api";
+import IncomeForm from "../../components/IncomeForm/IncomeForm";
+import IncomesFilterForm from "../../components/IncomesFilterForm/IncomesFilterForm";
 import "./IncomesPage.css";
 
-export default function IncomePage() {
+export default function IncomesPage() {
   const [incomes, setIncomes] = useState([]);
 
   useEffect(() => {
@@ -20,10 +20,20 @@ export default function IncomePage() {
     fetchIncomes();
   }, []);
 
+  async function addIncome(income) {
+    setIncomes((prevIncomes) => [...prevIncomes, income]);
+    try {
+      const data = await incomesAPI.getIncomes();
+      setIncomes(data);
+    } catch (error) {
+      console.error(error);
+    }
+  }
+
   return (
     <div className="IncomePage">
       <h1>Income</h1>
-      <IncomeForm />
+      <IncomeForm addIncome={addIncome}/>
       <IncomesFilterForm />
       <div>
       <h3>Your Income</h3>

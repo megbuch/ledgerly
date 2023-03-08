@@ -20,10 +20,20 @@ export default function ExpensesPage() {
     fetchExpenses();
   }, []);
 
+  async function addExpense(expense) {
+    setExpenses((prevExpenses) => [...prevExpenses, expense]);
+    try {
+      const data = await expensesAPI.getExpenses();
+      setExpenses(data);
+    } catch (error) {
+      console.error(error);
+    }
+  }
+
   return (
     <div className="ExpensesPage">
       <h1>Expenses</h1>
-      <ExpenseForm />
+      <ExpenseForm addExpense={addExpense} />
       <ExpensesFilterForm />
        <div>
       <h3>Your Expenses</h3>

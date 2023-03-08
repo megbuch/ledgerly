@@ -1,7 +1,7 @@
 import { useState } from "react";
 import * as expensesAPI from "../../utilities/expenses-api";
 
-export default function ExpenseForm({ setExpenses }) {
+export default function ExpenseForm({ addExpense }) {
   const [expenseFormData, setExpenseFormData] = useState({
     description: "",
     amount: "",
@@ -23,6 +23,15 @@ export default function ExpenseForm({ setExpenses }) {
     try {
       const expense = await expensesAPI.createExpense(expenseFormData);
       console.log("Expense saved:", expense);
+      addExpense(expense); // Call the addExpense function with the newly created expense
+      setExpenseFormData({
+        description: "",
+        amount: "",
+        category: "",
+        account: "",
+        date: "",
+        notes: "",
+      }); // Reset the form
     } catch (err) {
       console.error("Error saving expense:", err);
     }

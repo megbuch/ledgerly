@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import * as incomesAPI from "../../utilities/incomes-api";
 
-export default function IncomeForm() {
+export default function IncomeForm({ addIncome }) {
   const [incomeFormData, setIncomeFormData] = useState({
     description: "",
     amount: "",
@@ -23,6 +23,15 @@ export default function IncomeForm() {
     try {
       const income = await incomesAPI.createIncome(incomeFormData);
       console.log("Income saved:", income);
+      addIncome(income); // Call the addExpense function with the newly created expense
+      setIncomeFormData({
+        description: "",
+        amount: "",
+        category: "",
+        account: "",
+        date: "",
+        notes: "",
+      });
     } catch (err) {
       console.error("Error saving income:", err);
     }
