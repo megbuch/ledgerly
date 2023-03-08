@@ -30,6 +30,16 @@ export default function IncomesPage() {
     }
   }
 
+  async function handleDelete(incomeId) {
+    try {
+      await incomesAPI.deleteIncome(incomeId);
+      const data = await incomesAPI.getIncomes();
+      setIncomes(data);
+    } catch (error) {
+      console.error(error);
+    }
+  }
+
   return (
     <div className="IncomePage">
       <h1>Income</h1>
@@ -47,7 +57,7 @@ export default function IncomesPage() {
             <p>{income.category}</p>
             <p>{income.account}</p>
             <p>{income.notes}</p>
-            <button>x</button>
+            <button onClick={() => handleDelete(income._id)}>x</button>
           </div>
         ))}
       </ul>

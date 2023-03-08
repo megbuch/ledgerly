@@ -8,3 +8,7 @@ export async function createIncome(incomeFormData) {
 export async function getIncomes() {
   return await sendRequest(`${BASE_URL}`, "GET");
 }
+
+export async function deleteIncome(incomeId) {
+  return await sendRequest(`${BASE_URL}/${incomeId}`, "DELETE");
+}

@@ -2,7 +2,8 @@ const Income = require("../../models/income");
 
 module.exports = { 
   create, 
-  index 
+  index,
+  delete: deleteIncome,
 };
 
 async function create(req, res) {
@@ -35,3 +36,21 @@ async function index(req, res) {
     res.status(500).json({ error: "Internal Server Error: Failed to retrieve list of incomes." });
   }
 }
+
+async function deleteIncome(req, res) {
+  try {
+    const deletedIncome = await Income.findByIdAndDelete(req.params.id);
+    if (!deletedIncome) {
+      return res.status(404).json({ error: "Income not found" });
+    }
+    res.json({
+      success: true,
+      message: "Income deleted successfully",
+      income: deletedIncome,
+    });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: "Server error" });
+  }
+}
+
