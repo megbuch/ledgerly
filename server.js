@@ -3,6 +3,9 @@ const path = require('path');
 const favicon = require('serve-favicon');
 const logger = require('morgan');
 const methodOverride = require("method-override");
+const moment = require('moment-timezone');
+
+moment().tz("America/Los_Angeles").format();
 
 require('dotenv').config()
 require('./config/database')

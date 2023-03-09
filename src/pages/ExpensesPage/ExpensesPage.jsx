@@ -54,7 +54,7 @@ export default function ExpensesPage() {
                 <strong>{expense.description}</strong>
                 <span><i class="fa-solid fa-dollar-sign"></i> {expense.amount}</span>
               </p>
-              <p><i class="fa-solid fa-calendar"></i> {new Date(expense.date).toLocaleDateString()}</p>
+              <p><i class="fa-solid fa-calendar"></i> {new Date(expense.date).toLocaleString()}</p>
               <p><i class="fa-solid fa-folder"></i> {expense.category}</p>
               <p><i class="fa-solid fa-receipt"></i> {expense.account}</p>
               <p><i class="fa-solid fa-comment"></i> {expense.notes}</p>
