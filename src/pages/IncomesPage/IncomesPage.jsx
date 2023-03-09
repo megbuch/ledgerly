@@ -52,12 +52,12 @@ export default function IncomesPage() {
             <div key={income._id} className="card">
               <p>
                 <strong>{income.description}</strong>
-                <span>${income.amount}</span>
+                <span><i class="fa-solid fa-dollar-sign"></i> {income.amount}</span>
               </p>
-              <p>{new Date(income.date).toLocaleDateString()}</p>
-              <p>{income.category}</p>
-              <p>{income.account}</p>
-              <p>{income.notes}</p>
+              <p><i class="fa-solid fa-calendar"></i> {new Date(income.date).toLocaleDateString()}</p>
+              <p><i class="fa-solid fa-folder"></i> {income.category}</p>
+              <p><i class="fa-solid fa-receipt"></i> {income.account}</p>
+              <p><i class="fa-solid fa-comment"></i> {income.notes}</p>
               <button onClick={() => handleDelete(income._id)}>
                 <i class="fa-solid fa-trash"></i>
               </button>

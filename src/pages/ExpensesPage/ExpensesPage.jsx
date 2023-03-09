@@ -52,12 +52,12 @@ export default function ExpensesPage() {
             <div key={expense._id} className="card">
               <p>
                 <strong>{expense.description}</strong>
-                <span>${expense.amount}</span>
+                <span><i class="fa-solid fa-dollar-sign"></i> {expense.amount}</span>
               </p>
-              <p>{new Date(expense.date).toLocaleDateString()}</p>
-              <p>{expense.category}</p>
-              <p>{expense.account}</p>
-              <p>{expense.notes}</p>
+              <p><i class="fa-solid fa-calendar"></i> {new Date(expense.date).toLocaleDateString()}</p>
+              <p><i class="fa-solid fa-folder"></i> {expense.category}</p>
+              <p><i class="fa-solid fa-receipt"></i> {expense.account}</p>
+              <p><i class="fa-solid fa-comment"></i> {expense.notes}</p>
               <button onClick={() => handleDelete(expense._id)}>
                 <i class="fa-solid fa-trash"></i>
               </button>

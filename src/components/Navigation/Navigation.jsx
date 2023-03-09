@@ -20,9 +20,7 @@ export default function NavBar({ user, setUser }) {
         <Link to="/transactions">Transactions</Link>
         <Link to="/income">Income</Link>
         <Link to="/expenses">Expenses</Link>
-        <Link to="" onClick={handleLogOut}>
-          Log Out
-        </Link>
+        <Link to="" onClick={handleLogOut}><i class="fa-solid fa-right-from-bracket"></i> Log Out</Link>
       </div>
     </nav>
   );

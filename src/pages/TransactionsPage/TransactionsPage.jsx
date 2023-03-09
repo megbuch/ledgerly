@@ -33,12 +33,12 @@ export default function TransactionsPage() {
             <div key={transaction._id} className="card">
               <p>
                 <strong>{transaction.description}</strong>
-                <span>${transaction.amount}</span>
+                <span><i class="fa-solid fa-dollar-sign"></i> {transaction.amount}</span>
               </p>
-              <p>{new Date(transaction.date).toLocaleDateString()}</p>
-              <p>{transaction.category}</p>
-              <p>{transaction.account}</p>
-              <p>{transaction.notes}</p>
+              <p><i class="fa-solid fa-calendar"></i> {new Date(transaction.date).toLocaleDateString()}</p>
+              <p><i class="fa-solid fa-folder"></i> {transaction.category}</p>
+              <p><i class="fa-solid fa-receipt"></i> {transaction.account}</p>
+              <p><i class="fa-solid fa-comment"></i> {transaction.notes}</p>
               <button>
                 <i class="fa-solid fa-trash"></i>
               </button>
