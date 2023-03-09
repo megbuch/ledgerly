@@ -6,6 +6,7 @@ import "./IncomesPage.css";
 
 export default function IncomesPage() {
   const [incomes, setIncomes] = useState([]);
+  const [showModal, setShowModal] = useState(false);
 
   useEffect(() => {
     async function fetchIncomes() {
@@ -25,6 +26,7 @@ export default function IncomesPage() {
     try {
       const data = await incomesAPI.getIncomes();
       setIncomes(data);
+      setShowModal(false);
     } catch (error) {
       console.error(error);
     }
@@ -40,11 +42,15 @@ export default function IncomesPage() {
     }
   }
 
+  function toggleIncomeForm() {
+    setShowModal((prevShowModal) => !prevShowModal);
+  }
+
   return (
     <div className="IncomePage">
       <h1>Income</h1>
-      <IncomeForm addIncome={addIncome} />
       <IncomesFilterForm />
+      <button onClick={toggleIncomeForm}><i class="fa-solid fa-plus"></i> Add Income</button>
       <div>
         <h3>Your Income</h3>
         <ul>
@@ -79,6 +85,17 @@ export default function IncomesPage() {
           ))}
         </ul>
       </div>
+
+      {showModal ? (
+        <div className="modal">
+          <div className="modal-content">
+            <span className="close" onClick={toggleIncomeForm}>
+              &times;
+            </span>
+            <IncomeForm addIncome={addIncome} />
+          </div>
+        </div>
+      ) : null}
     </div>
   );
 }
