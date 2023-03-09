@@ -6,6 +6,7 @@ import "./ExpensesPage.css";
 
 export default function ExpensesPage() {
   const [expenses, setExpenses] = useState([]);
+  const [showModal, setShowModal] = useState(false);
 
   useEffect(() => {
     async function fetchExpenses() {
@@ -25,6 +26,7 @@ export default function ExpensesPage() {
     try {
       const data = await expensesAPI.getExpenses();
       setExpenses(data);
+      setShowModal(false);
     } catch (error) {
       console.error(error);
     }
@@ -40,11 +42,15 @@ export default function ExpensesPage() {
     }
   }
 
+  function toggleExpenseForm() {
+    setShowModal((prevShowModal) => !prevShowModal);
+  }
+
   return (
     <div className="ExpensesPage">
       <h1>Expenses</h1>
-      <ExpenseForm addExpense={addExpense} />
       <ExpensesFilterForm />
+      <button onClick={toggleExpenseForm}><i class="fa-solid fa-plus"></i> Add Expense</button>
       <div>
         <h3>Your Expenses</h3>
         <ul>
@@ -52,19 +58,44 @@ export default function ExpensesPage() {
             <div key={expense._id} className="card">
               <p>
                 <strong>{expense.description}</strong>
-                <span><i class="fa-solid fa-dollar-sign"></i> {expense.amount}</span>
+                <span>
+                  <i class="fa-solid fa-dollar-sign"></i> {expense.amount}
+                </span>
               </p>
-              <p><i class="fa-solid fa-calendar"></i> {new Date(expense.date).toLocaleString()}</p>
-              <p><i class="fa-solid fa-folder"></i> {expense.category}</p>
-              <p><i class="fa-solid fa-receipt"></i> {expense.account}</p>
-              <p><i class="fa-solid fa-comment"></i> {expense.notes}</p>
+              <p>
+                <i class="fa-solid fa-calendar"></i>{" "}
+                {new Date(expense.date).toLocaleDateString()}
+              </p>
+              <p>
+                <i class="fa-solid fa-folder"></i> {expense.category}
+              </p>
+              <p>
+                <i class="fa-solid fa-receipt"></i> {expense.account}
+              </p>
+              <p>
+                <i class="fa-solid fa-comment"></i> {expense.notes}
+              </p>
               <button onClick={() => handleDelete(expense._id)}>
                 <i class="fa-solid fa-trash"></i>
+              </button>
+              <button>
+                <i class="fa-solid fa-pen-to-square"></i>
               </button>
             </div>
           ))}
         </ul>
       </div>
+
+      {showModal ? (
+        <div className="modal">
+          <div className="modal-content">
+            <span className="close" onClick={toggleExpenseForm}>
+              &times;
+            </span>
+            <ExpenseForm addExpense={addExpense} />
+          </div>
+        </div>
+      ) : null}
     </div>
   );
 }
