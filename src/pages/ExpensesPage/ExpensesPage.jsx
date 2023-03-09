@@ -7,6 +7,11 @@ import "./ExpensesPage.css";
 export default function ExpensesPage() {
   const [expenses, setExpenses] = useState([]);
   const [showModal, setShowModal] = useState(false);
+  const [selectedExpense, setSelectedExpense] = useState(null);
+
+  function toggleExpenseForm() {
+    setShowModal((prevShowModal) => !prevShowModal);
+  }
 
   useEffect(() => {
     async function fetchExpenses() {
@@ -42,15 +47,18 @@ export default function ExpensesPage() {
     }
   }
 
-  function toggleExpenseForm() {
-    setShowModal((prevShowModal) => !prevShowModal);
+  function toggleEdit(expense) {
+    setSelectedExpense(expense);
+    setShowModal(true);
   }
 
   return (
     <div className="ExpensesPage">
       <h1>Expenses</h1>
       <ExpensesFilterForm />
-      <button onClick={toggleExpenseForm}><i class="fa-solid fa-plus"></i> Add Expense</button>
+      <button onClick={toggleExpenseForm}>
+        <i class="fa-solid fa-plus"></i> Add Expense
+      </button>
       <div>
         <h3>Your Expenses</h3>
         <ul>
@@ -63,7 +71,7 @@ export default function ExpensesPage() {
                 </span>
               </p>
               <p>
-                <i class="fa-solid fa-calendar"></i>{" "}
+                <i class="fa-solid fa-calendar"></i>
                 {new Date(expense.date).toLocaleDateString()}
               </p>
               <p>
@@ -78,7 +86,7 @@ export default function ExpensesPage() {
               <button onClick={() => handleDelete(expense._id)}>
                 <i class="fa-solid fa-trash"></i>
               </button>
-              <button>
+              <button onClick={() => toggleEdit(expense)}>
                 <i class="fa-solid fa-pen-to-square"></i>
               </button>
             </div>
@@ -92,7 +100,10 @@ export default function ExpensesPage() {
             <span className="close" onClick={toggleExpenseForm}>
               &times;
             </span>
-            <ExpenseForm addExpense={addExpense} />
+            <ExpenseForm
+              addExpense={addExpense}
+              selectedExpense={selectedExpense}
+            />
           </div>
         </div>
       ) : null}

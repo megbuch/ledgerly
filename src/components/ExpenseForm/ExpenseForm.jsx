@@ -1,15 +1,34 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import * as expensesAPI from "../../utilities/expenses-api";
 
-export default function ExpenseForm({ addExpense }) {
-  const [expenseFormData, setExpenseFormData] = useState({
-    description: "",
-    amount: "",
-    category: "",
-    account: "",
-    date: "",
-    notes: "",
+export default function ExpenseForm({ addExpense, selectedExpense }) {
+  const [expenseFormData, setExpenseFormData] = useState(() => {
+    if (selectedExpense) {
+      return {
+        description: selectedExpense.description,
+        amount: selectedExpense.amount,
+        category: selectedExpense.category,
+        account: selectedExpense.account,
+        date: selectedExpense.date,
+        notes: selectedExpense.notes,
+      };
+    } else {
+      return {
+        description: "",
+        amount: "",
+        category: "",
+        account: "",
+        date: "",
+        notes: "",
+      };
+    }
   });
+
+  useEffect(() => {
+    if (selectedExpense) {
+      setExpenseFormData(selectedExpense);
+    }
+  }, [selectedExpense]);
 
   const handleChange = (event) => {
     setExpenseFormData({
@@ -39,7 +58,7 @@ export default function ExpenseForm({ addExpense }) {
 
   return (
     <>
-      <h3>Add an Expense</h3>
+      <h3>{selectedExpense ? "Edit Expense" : "Add an Expense"}</h3>
       <form onSubmit={handleSubmit}>
         <label htmlFor="description">Description</label>
         <input
