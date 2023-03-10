@@ -9,10 +9,6 @@ export default function ExpensesPage() {
   const [showModal, setShowModal] = useState(false);
   const [selectedExpense, setSelectedExpense] = useState(null);
 
-  function toggleExpenseForm() {
-    setShowModal((prevShowModal) => !prevShowModal);
-  }
-
   useEffect(() => {
     async function fetchExpenses() {
       try {
@@ -47,7 +43,13 @@ export default function ExpensesPage() {
     }
   }
 
-  function toggleEdit(expense) {
+  function handleToggleModal() {
+    setShowModal(prevShowModal => !prevShowModal);
+    setSelectedExpense(null);
+  }
+
+
+  function handleEdit(expense) {
     setSelectedExpense(expense);
     setShowModal(true);
   }
@@ -56,7 +58,7 @@ export default function ExpensesPage() {
     <div className="ExpensesPage">
       <h1>Expenses</h1>
       <ExpensesFilterForm />
-      <button onClick={toggleExpenseForm}>
+      <button onClick={handleToggleModal}>
         <i class="fa-solid fa-plus"></i> Add Expense
       </button>
       <div>
@@ -86,7 +88,7 @@ export default function ExpensesPage() {
               <button onClick={() => handleDelete(expense._id)}>
                 <i class="fa-solid fa-trash"></i>
               </button>
-              <button onClick={() => toggleEdit(expense)}>
+              <button onClick={() => handleEdit(expense)}>
                 <i class="fa-solid fa-pen-to-square"></i>
               </button>
             </div>
@@ -97,7 +99,7 @@ export default function ExpensesPage() {
       {showModal ? (
         <div className="modal">
           <div className="modal-content">
-            <span className="close" onClick={toggleExpenseForm}>
+            <span className="close" onClick={handleToggleModal}>
               &times;
             </span>
             <ExpenseForm

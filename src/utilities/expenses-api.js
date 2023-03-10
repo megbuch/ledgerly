@@ -14,6 +14,5 @@ export async function deleteExpense(expenseId) {
 }
 
 export async function updateExpense(expenseId, expenseFormData) {
-  console.log("updateExpense called with expenseId:", expenseId, "and expenseFormData:", expenseFormData);
   return await sendRequest(`${BASE_URL}/${expenseId}`, "PUT", expenseFormData);
 }

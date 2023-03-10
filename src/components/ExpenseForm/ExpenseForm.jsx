@@ -40,10 +40,10 @@ export default function ExpenseForm({
     });
   }
 
-  async function handleUpdate(expenseId, expenseFormData) {
+  async function handleUpdate(expenseFormData) {
     try {
       const updatedExpense = await expensesAPI.updateExpense(
-        expenseId,
+        selectedExpense._id,
         expenseFormData
       );
       console.log("Expense updated:", updatedExpense);
@@ -64,26 +64,32 @@ export default function ExpenseForm({
 
   async function handleSubmit(event) {
     event.preventDefault();
-    try {
-      const expense = await expensesAPI.createExpense(expenseFormData);
-      console.log("Expense saved:", expense);
-      addExpense(expense);
-      setExpenseFormData({
-        description: "",
-        amount: "",
-        category: "",
-        account: "",
-        notes: "",
-      });
-    } catch (err) {
-      console.error("Error saving expense:", err);
+    if (selectedExpense) {
+      handleUpdate(expenseFormData);
+    } else {
+      try {
+        const expense = await expensesAPI.createExpense(expenseFormData);
+        console.log("Expense saved:", expense);
+        addExpense(expense);
+        setExpenseFormData({
+          description: "",
+          amount: "",
+          category: "",
+          account: "",
+          notes: "",
+        });
+        setShowModal(false);
+        setSelectedExpense(null);
+      } catch (err) {
+        console.error("Error saving expense:", err);
+      }
     }
   }
 
   return (
     <>
       <h3>{selectedExpense ? "Edit Expense" : "Add an Expense"}</h3>
-      <form onSubmit={selectedExpense ? handleUpdate : handleSubmit}>
+      <form onSubmit={handleSubmit}>
         <label htmlFor="description">Description</label>
         <input
           type="text"
