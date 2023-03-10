@@ -1,31 +1,26 @@
-export default function FilterForm() {
+export default function ExpensesFilterForm({
+  categories,
+  selectedCategory,
+  setSelectedCategory,
+}) {
+  function handleChange(event) {
+    const category = event.target.value;
+    setSelectedCategory(category);
+  }
+
   return (
     <>
       <h3>Filter</h3>
       <form>
         <label htmlFor="category">Category</label>
-        <select id="category" name="category">
-          <option value="" disabled>
-            Select a category
-          </option>
-          {[
-            "Accounting Fees",
-            "Advertising & Promotion",
-            "Computer Expense",
-            "Depreciation Expense",
-            "Interest Expense",
-            "Meals & Entertainment",
-            "Office Supplies",
-            "Payroll Expense",
-            "Professional Fees",
-            "Rent Expense",
-            "Repairs & Maintenance",
-            "Telephone",
-            "Travel Expense",
-            "Utilities",
-            "Vehicle Expense",
-          ].map((category) => (
-            <option key={category} value={category}>
+        <select
+          id="category"
+          name="category"
+          value={selectedCategory}
+          onChange={handleChange}
+        >
+          {categories.map((category, index) => (
+            <option key={category} value={index === 0 ? "" : category}>
               {category}
             </option>
           ))}

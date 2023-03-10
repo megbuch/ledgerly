@@ -8,6 +8,14 @@ export default function ExpensesPage() {
   const [expenses, setExpenses] = useState([]);
   const [showModal, setShowModal] = useState(false);
   const [selectedExpense, setSelectedExpense] = useState(null);
+  const [selectedCategory, setSelectedCategory] = useState("");
+
+  const categories = ["All Categories"];
+  for (let i = 0; i < expenses.length; i++) {
+    if (!categories.includes(expenses[i].category)) {
+      categories.push(expenses[i].category);
+    }
+  }
 
   useEffect(() => {
     async function fetchExpenses() {
@@ -44,10 +52,9 @@ export default function ExpensesPage() {
   }
 
   function handleToggleModal() {
-    setShowModal(prevShowModal => !prevShowModal);
+    setShowModal((prevShowModal) => !prevShowModal);
     setSelectedExpense(null);
   }
-
 
   function handleEdit(expense) {
     setSelectedExpense(expense);
@@ -57,42 +64,51 @@ export default function ExpensesPage() {
   return (
     <div className="ExpensesPage">
       <h1>Expenses</h1>
-      <ExpensesFilterForm />
+      <ExpensesFilterForm
+        categories={categories}
+        selectedCategory={selectedCategory}
+        setSelectedCategory={setSelectedCategory}
+      />
       <button onClick={handleToggleModal}>
         <i class="fa-solid fa-plus"></i> Add Expense
       </button>
       <div>
         <h3>Your Expenses</h3>
         <ul>
-          {expenses.map((expense) => (
-            <div key={expense._id} className="card">
-              <p>
-                <strong>{expense.description}</strong>
-                <span>
-                  <i class="fa-solid fa-dollar-sign"></i> {expense.amount}
-                </span>
-              </p>
-              <p>
-                <i class="fa-solid fa-calendar"></i>
-                {new Date(expense.createdAt).toLocaleDateString()}
-              </p>
-              <p>
-                <i class="fa-solid fa-folder"></i> {expense.category}
-              </p>
-              <p>
-                <i class="fa-solid fa-receipt"></i> {expense.account}
-              </p>
-              <p>
-                <i class="fa-solid fa-comment"></i> {expense.notes}
-              </p>
-              <button onClick={() => handleDelete(expense._id)}>
-                <i class="fa-solid fa-trash"></i>
-              </button>
-              <button onClick={() => handleEdit(expense)}>
-                <i class="fa-solid fa-pen-to-square"></i>
-              </button>
-            </div>
-          ))}
+          {expenses
+            .filter(
+              (expense) =>
+                selectedCategory === "" || expense.category === selectedCategory
+            )
+            .map((expense) => (
+              <div key={expense._id} className="card">
+                <p>
+                  <strong>{expense.description}</strong>
+                  <span>
+                    <i class="fa-solid fa-dollar-sign"></i> {expense.amount}
+                  </span>
+                </p>
+                <p>
+                  <i class="fa-solid fa-calendar"></i>
+                  {new Date(expense.createdAt).toLocaleDateString()}
+                </p>
+                <p>
+                  <i class="fa-solid fa-folder"></i> {expense.category}
+                </p>
+                <p>
+                  <i class="fa-solid fa-receipt"></i> {expense.account}
+                </p>
+                <p>
+                  <i class="fa-solid fa-comment"></i> {expense.notes}
+                </p>
+                <button onClick={() => handleDelete(expense._id)}>
+                  <i class="fa-solid fa-trash"></i>
+                </button>
+                <button onClick={() => handleEdit(expense)}>
+                  <i class="fa-solid fa-pen-to-square"></i>
+                </button>
+              </div>
+            ))}
         </ul>
       </div>
 
@@ -110,7 +126,9 @@ export default function ExpensesPage() {
             />
           </div>
         </div>
-      ) : null}
+      ) : (
+        false
+      )}
     </div>
   );
 }

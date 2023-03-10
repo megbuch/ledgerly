@@ -35,7 +35,7 @@ export default function TransactionsPage() {
                 <strong>{transaction.description}</strong>
                 <span><i class="fa-solid fa-dollar-sign"></i> {transaction.amount}</span>
               </p>
-              <p><i class="fa-solid fa-calendar"></i> {new Date(transaction.date).toLocaleDateString()}</p>
+              <p><i class="fa-solid fa-calendar"></i> {new Date(transaction.createdAt).toLocaleDateString()}</p>
               <p><i class="fa-solid fa-folder"></i> {transaction.category}</p>
               <p><i class="fa-solid fa-receipt"></i> {transaction.account}</p>
               <p><i class="fa-solid fa-comment"></i> {transaction.notes}</p>
