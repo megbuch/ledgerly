@@ -64,7 +64,7 @@ export default function IncomesPage() {
               </p>
               <p>
                 <i class="fa-solid fa-calendar"></i>
-                {new Date(income.date).toLocaleDateString()}
+                {new Date(income.createdAt).toLocaleDateString()}
               </p>
               <p>
                 <i class="fa-solid fa-folder"></i> {income.category}

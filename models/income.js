@@ -20,10 +20,6 @@ const incomeSchema = new Schema(
       type: String,
       enum: ["Checking", "Savings", "Credit Card", "Cash"],
     },
-    date: {
-      type: Date,
-      required: true,
-    },
     notes: {
       type: String,
     },

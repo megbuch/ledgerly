@@ -72,7 +72,7 @@ export default function ExpensesPage() {
               </p>
               <p>
                 <i class="fa-solid fa-calendar"></i>
-                {new Date(expense.date).toLocaleDateString()}
+                {new Date(expense.createdAt).toLocaleDateString()}
               </p>
               <p>
                 <i class="fa-solid fa-folder"></i> {expense.category}
@@ -103,6 +103,8 @@ export default function ExpensesPage() {
             <ExpenseForm
               addExpense={addExpense}
               selectedExpense={selectedExpense}
+              setShowModal={setShowModal}
+              setSelectedExpense={setSelectedExpense}
             />
           </div>
         </div>

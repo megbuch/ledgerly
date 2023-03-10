@@ -7,7 +7,6 @@ export default function IncomeForm({ addIncome }) {
     amount: "",
     category: "",
     account: "",
-    date: "",
     notes: "",
   });
 
@@ -29,7 +28,6 @@ export default function IncomeForm({ addIncome }) {
         amount: "",
         category: "",
         account: "",
-        date: "",
         notes: "",
       });
     } catch (err) {
@@ -89,15 +87,6 @@ export default function IncomeForm({ addIncome }) {
           <option value="Credit Card">Credit Card</option>
           <option value="Cash">Cash</option>
         </select>
-        <label htmlFor="date">Date</label>
-        <input
-          type="date"
-          id="date"
-          name="date"
-          value={incomeFormData.date}
-          onChange={handleChange}
-          required
-        />
         <label htmlFor="notes">Notes</label>
         <textarea
           id="notes"

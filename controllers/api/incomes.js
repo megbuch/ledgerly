@@ -1,7 +1,7 @@
 const Income = require("../../models/income");
 
-module.exports = { 
-  create, 
+module.exports = {
+  create,
   index,
   delete: deleteIncome,
 };
@@ -12,9 +12,8 @@ async function create(req, res) {
     amount: req.body.amount,
     category: req.body.category,
     account: req.body.account,
-    date: req.body.date,
     notes: req.body.notes,
-    user: req.user._id
+    user: req.user._id,
   });
 
   try {
@@ -27,13 +26,17 @@ async function create(req, res) {
 
 async function index(req, res) {
   try {
-    const incomes = await Income
-      .find({ user: req.user._id })
-      .sort({date: -1});
+    const incomes = await Income.find({ user: req.user._id }).sort({
+      createdAt: -1,
+    });
     res.json(incomes);
   } catch (error) {
     console.error(error);
-    res.status(500).json({ error: "Internal Server Error: Failed to retrieve list of incomes." });
+    res
+      .status(500)
+      .json({
+        error: "Internal Server Error: Failed to retrieve list of incomes.",
+      });
   }
 }
 
@@ -53,4 +56,3 @@ async function deleteIncome(req, res) {
     res.status(500).json({ error: "Server error" });
   }
 }
-

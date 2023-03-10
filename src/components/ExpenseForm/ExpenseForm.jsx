@@ -1,7 +1,12 @@
 import { useState, useEffect } from "react";
 import * as expensesAPI from "../../utilities/expenses-api";
 
-export default function ExpenseForm({ addExpense, selectedExpense }) {
+export default function ExpenseForm({
+  addExpense,
+  selectedExpense,
+  setShowModal,
+  setSelectedExpense,
+}) {
   const [expenseFormData, setExpenseFormData] = useState(() => {
     if (selectedExpense) {
       return {
@@ -9,7 +14,6 @@ export default function ExpenseForm({ addExpense, selectedExpense }) {
         amount: selectedExpense.amount,
         category: selectedExpense.category,
         account: selectedExpense.account,
-        date: selectedExpense.date,
         notes: selectedExpense.notes,
       };
     } else {
@@ -18,7 +22,6 @@ export default function ExpenseForm({ addExpense, selectedExpense }) {
         amount: "",
         category: "",
         account: "",
-        date: "",
         notes: "",
       };
     }
@@ -30,14 +33,36 @@ export default function ExpenseForm({ addExpense, selectedExpense }) {
     }
   }, [selectedExpense]);
 
-  const handleChange = (event) => {
+  async function handleChange(event) {
     setExpenseFormData({
       ...expenseFormData,
       [event.target.name]: event.target.value,
     });
-  };
+  }
 
-  const handleSubmit = async (event) => {
+  async function handleUpdate(expenseId, expenseFormData) {
+    try {
+      const updatedExpense = await expensesAPI.updateExpense(
+        expenseId,
+        expenseFormData
+      );
+      console.log("Expense updated:", updatedExpense);
+      addExpense(updatedExpense);
+      setExpenseFormData({
+        description: "",
+        amount: "",
+        category: "",
+        account: "",
+        notes: "",
+      });
+      setShowModal(false);
+      setSelectedExpense(null);
+    } catch (err) {
+      console.error("handleUpdate - Error updating expense:", err);
+    }
+  }
+
+  async function handleSubmit(event) {
     event.preventDefault();
     try {
       const expense = await expensesAPI.createExpense(expenseFormData);
@@ -48,18 +73,17 @@ export default function ExpenseForm({ addExpense, selectedExpense }) {
         amount: "",
         category: "",
         account: "",
-        date: "",
         notes: "",
       });
     } catch (err) {
       console.error("Error saving expense:", err);
     }
-  };
+  }
 
   return (
     <>
       <h3>{selectedExpense ? "Edit Expense" : "Add an Expense"}</h3>
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={selectedExpense ? handleUpdate : handleSubmit}>
         <label htmlFor="description">Description</label>
         <input
           type="text"
@@ -69,7 +93,6 @@ export default function ExpenseForm({ addExpense, selectedExpense }) {
           onChange={handleChange}
           required
         />
-
         <label htmlFor="amount">Amount</label>
         <input
           type="number"
@@ -79,7 +102,6 @@ export default function ExpenseForm({ addExpense, selectedExpense }) {
           onChange={handleChange}
           required
         />
-
         <label htmlFor="category">Category</label>
         <select
           id="category"
@@ -113,7 +135,6 @@ export default function ExpenseForm({ addExpense, selectedExpense }) {
             </option>
           ))}
         </select>
-
         <label htmlFor="account">Account</label>
         <select
           id="account"
@@ -127,17 +148,6 @@ export default function ExpenseForm({ addExpense, selectedExpense }) {
           <option value="Credit Card">Credit Card</option>
           <option value="Cash">Cash</option>
         </select>
-
-        <label htmlFor="date">Date</label>
-        <input
-          type="date"
-          id="date"
-          name="date"
-          value={expenseFormData.date}
-          onChange={handleChange}
-          required
-        />
-
         <label htmlFor="notes">Notes</label>
         <textarea
           id="notes"
@@ -145,7 +155,6 @@ export default function ExpenseForm({ addExpense, selectedExpense }) {
           value={expenseFormData.notes}
           onChange={handleChange}
         ></textarea>
-
         <button type="submit">Submit</button>
       </form>
     </>

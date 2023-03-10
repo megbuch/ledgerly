@@ -4,6 +4,7 @@ module.exports = {
   create,
   index,
   delete: deleteExpense,
+  update,
 };
 
 async function create(req, res) {
@@ -12,7 +13,6 @@ async function create(req, res) {
     amount: req.body.amount,
     category: req.body.category,
     account: req.body.account,
-    date: req.body.date,
     notes: req.body.notes,
     user: req.user._id,
   });
@@ -27,7 +27,7 @@ async function create(req, res) {
 async function index(req, res) {
   try {
     const expenses = await Expense.find({ user: req.user._id }).sort({
-      date: -1,
+      createdAt: -1,
     });
     res.json(expenses);
   } catch (error) {
@@ -51,6 +51,21 @@ async function deleteExpense(req, res) {
     });
   } catch (error) {
     console.error(error);
-    res.status(500).json({ error: "Server error" });
+    res.status(500).json({ error: "Error deleting expense" });
+  }
+}
+
+async function update(req, res) {
+  try {
+    const expense = await Expense.findById(req.params.id);
+    expense.description = req.body.description;
+    expense.amount = req.body.amount;
+    expense.category = req.body.category;
+    expense.account = req.body.account;
+    expense.notes = req.body.notes;
+    const updatedExpense = await expense.save();
+    res.json(updatedExpense);
+  } catch (error) {
+    res.status(500).json({ error: "Error updating expense" });
   }
 }
