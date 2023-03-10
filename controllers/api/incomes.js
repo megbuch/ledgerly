@@ -12,6 +12,7 @@ async function create(req, res) {
     description: req.body.description,
     amount: req.body.amount,
     category: req.body.category,
+    date: req.body.date,
     account: req.body.account,
     notes: req.body.notes,
     user: req.user._id,

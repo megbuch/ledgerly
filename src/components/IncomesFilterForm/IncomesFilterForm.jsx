@@ -25,10 +25,6 @@ export default function FilterForm({
             </option>
           ))}
         </select>
-        <label htmlFor="date">Start Date</label>
-        <input type="date" id="date" name="date" />
-        <label htmlFor="date">End Date</label>
-        <input type="date" id="date" name="date" />
       </form>
     </>
   );

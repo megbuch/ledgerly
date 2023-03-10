@@ -16,6 +16,10 @@ const incomeSchema = new Schema(
       enum: ["Sales", "Uncategorized Income"],
       required: true,
     },
+    date: {
+      type: Date,
+      required: true,
+    },
     account: {
       type: String,
       enum: ["Checking", "Savings", "Credit Card", "Cash"],

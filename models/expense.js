@@ -32,6 +32,10 @@ const expenseSchema = new Schema(
       ],
       required: true,
     },
+    date: {
+      type: Date,
+      required: true,
+    },
     account: {
       type: String,
       enum: ["Checking", "Savings", "Credit Card", "Cash"],

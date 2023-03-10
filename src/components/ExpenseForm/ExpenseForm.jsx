@@ -13,6 +13,7 @@ export default function ExpenseForm({
         description: selectedExpense.description,
         amount: selectedExpense.amount,
         category: selectedExpense.category,
+        date: selectedExpense.date,
         account: selectedExpense.account,
         notes: selectedExpense.notes,
       };
@@ -21,6 +22,7 @@ export default function ExpenseForm({
         description: "",
         amount: "",
         category: "",
+        date: "",
         account: "",
         notes: "",
       };
@@ -52,6 +54,7 @@ export default function ExpenseForm({
         description: "",
         amount: "",
         category: "",
+        date: "",
         account: "",
         notes: "",
       });
@@ -75,6 +78,7 @@ export default function ExpenseForm({
           description: "",
           amount: "",
           category: "",
+          date: "",
           account: "",
           notes: "",
         });
@@ -141,6 +145,15 @@ export default function ExpenseForm({
             </option>
           ))}
         </select>
+        <label htmlFor="date">Date</label>
+        <input
+          type="date"
+          id="date"
+          name="date"
+          value={expenseFormData.date}
+          onChange={handleChange}
+          required
+        />
         <label htmlFor="account">Account</label>
         <select
           id="account"

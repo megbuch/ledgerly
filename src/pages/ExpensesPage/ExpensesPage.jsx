@@ -80,8 +80,8 @@ export default function ExpensesPage() {
               (expense) =>
                 selectedCategory === "" || expense.category === selectedCategory
             )
-            .map((expense) => (
-              <div key={expense._id} className="card">
+            .map((expense, index) => (
+              <div key={index} className="card">
                 <p>
                   <strong>{expense.description}</strong>
                   <span>
@@ -89,11 +89,11 @@ export default function ExpensesPage() {
                   </span>
                 </p>
                 <p>
-                  <i class="fa-solid fa-calendar"></i>
-                  {new Date(expense.createdAt).toLocaleDateString()}
+                  <i class="fa-solid fa-folder"></i> {expense.category}
                 </p>
                 <p>
-                  <i class="fa-solid fa-folder"></i> {expense.category}
+                  <i class="fa-solid fa-calendar"></i>
+                  {expense.date}
                 </p>
                 <p>
                   <i class="fa-solid fa-receipt"></i> {expense.account}

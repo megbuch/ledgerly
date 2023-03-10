@@ -13,6 +13,7 @@ export default function IncomeForm({
         description: selectedIncome.description,
         amount: selectedIncome.amount,
         category: selectedIncome.category,
+        date: selectedIncome.category,
         account: selectedIncome.account,
         notes: selectedIncome.notes,
       };
@@ -21,6 +22,7 @@ export default function IncomeForm({
         description: "",
         amount: "",
         category: "",
+        date: "",
         account: "",
         notes: "",
       };
@@ -52,6 +54,7 @@ export default function IncomeForm({
         description: "",
         amount: "",
         category: "",
+        date: "",
         account: "",
         notes: "",
       });
@@ -75,6 +78,7 @@ export default function IncomeForm({
           description: "",
           amount: "",
           category: "",
+          date: "",
           account: "",
           notes: "",
         });
@@ -117,7 +121,7 @@ export default function IncomeForm({
           required
         >
           <option value="" disabled>
-            Select a category
+            Select a Category
           </option>
           {["Sales", "Uncategorized Income"].map((category) => (
             <option key={category} value={category}>
@@ -125,6 +129,15 @@ export default function IncomeForm({
             </option>
           ))}
         </select>
+        <label htmlFor="date">Date</label>
+        <input
+          type="date"
+          id="date"
+          name="date"
+          value={incomeFormData.date}
+          onChange={handleChange}
+          required
+        />
         <label htmlFor="account">Account</label>
         <select
           id="account"
