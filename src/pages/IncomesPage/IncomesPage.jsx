@@ -8,6 +8,14 @@ export default function IncomesPage() {
   const [incomes, setIncomes] = useState([]);
   const [showModal, setShowModal] = useState(false);
   const [selectedIncome, setSelectedIncome] = useState(null);
+  const [selectedCategory, setSelectedCategory] = useState("");
+
+  const categories = ["All Categories"];
+  for (let i = 0; i < incomes.length; i++) {
+    if (!categories.includes(incomes[i].category)) {
+      categories.push(incomes[i].category);
+    }
+  }
 
   useEffect(() => {
     async function fetchIncomes() {
@@ -44,7 +52,7 @@ export default function IncomesPage() {
   }
 
   function handleToggleModal() {
-    setShowModal(prevShowModal => !prevShowModal);
+    setShowModal((prevShowModal) => !prevShowModal);
     setSelectedIncome(null);
   }
 
@@ -56,40 +64,51 @@ export default function IncomesPage() {
   return (
     <div className="IncomePage">
       <h1>Income</h1>
-      <IncomesFilterForm />
-      <button onClick={handleToggleModal}><i class="fa-solid fa-plus"></i> Add Income</button>
+      <IncomesFilterForm
+        categories={categories}
+        selectedCategory={selectedCategory}
+        setSelectedCategory={setSelectedCategory}
+      />
+      <button onClick={handleToggleModal}>
+        <i class="fa-solid fa-plus"></i> Add Income
+      </button>
       <div>
         <h3>Your Income</h3>
         <ul>
-          {incomes.map((income) => (
-            <div key={income._id} className="card">
-              <p>
-                <strong>{income.description}</strong>
-                <span>
-                  <i class="fa-solid fa-dollar-sign"></i> {income.amount}
-                </span>
-              </p>
-              <p>
-                <i class="fa-solid fa-calendar"></i>
-                {new Date(income.createdAt).toLocaleDateString()}
-              </p>
-              <p>
-                <i class="fa-solid fa-folder"></i> {income.category}
-              </p>
-              <p>
-                <i class="fa-solid fa-receipt"></i> {income.account}
-              </p>
-              <p>
-                <i class="fa-solid fa-comment"></i> {income.notes}
-              </p>
-              <button onClick={() => handleDelete(income._id)}>
-                <i class="fa-solid fa-trash"></i>
-              </button>
-              <button onClick={() => handleEdit(income)}>
-                <i class="fa-solid fa-pen-to-square"></i>
-              </button>
-            </div>
-          ))}
+          {incomes
+            .filter(
+              (income) =>
+                selectedCategory === "" || income.category === selectedCategory
+            )
+            .map((income) => (
+              <div key={income._id} className="card">
+                <p>
+                  <strong>{income.description}</strong>
+                  <span>
+                    <i class="fa-solid fa-dollar-sign"></i> {income.amount}
+                  </span>
+                </p>
+                <p>
+                  <i class="fa-solid fa-calendar"></i>
+                  {new Date(income.createdAt).toLocaleDateString()}
+                </p>
+                <p>
+                  <i class="fa-solid fa-folder"></i> {income.category}
+                </p>
+                <p>
+                  <i class="fa-solid fa-receipt"></i> {income.account}
+                </p>
+                <p>
+                  <i class="fa-solid fa-comment"></i> {income.notes}
+                </p>
+                <button onClick={() => handleDelete(income._id)}>
+                  <i class="fa-solid fa-trash"></i>
+                </button>
+                <button onClick={() => handleEdit(income)}>
+                  <i class="fa-solid fa-pen-to-square"></i>
+                </button>
+              </div>
+            ))}
         </ul>
       </div>
 
@@ -99,12 +118,12 @@ export default function IncomesPage() {
             <span className="close" onClick={handleToggleModal}>
               &times;
             </span>
-            <IncomeForm 
+            <IncomeForm
               addIncome={addIncome}
               selectedIncome={selectedIncome}
               setSelectedIncome={setSelectedIncome}
               setShowModal={setShowModal}
-             />
+            />
           </div>
         </div>
       ) : null}
