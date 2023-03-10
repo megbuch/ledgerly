@@ -4,8 +4,8 @@ import * as expensesAPI from "../../utilities/expenses-api";
 export default function ExpenseForm({
   addExpense,
   selectedExpense,
-  setShowModal,
   setSelectedExpense,
+  setShowModal,
 }) {
   const [expenseFormData, setExpenseFormData] = useState(() => {
     if (selectedExpense) {
@@ -58,7 +58,7 @@ export default function ExpenseForm({
       setShowModal(false);
       setSelectedExpense(null);
     } catch (err) {
-      console.error("handleUpdate - Error updating expense:", err);
+      console.error("Error updating expense:", err);
     }
   }
 

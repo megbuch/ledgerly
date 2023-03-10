@@ -1,28 +1,53 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import * as incomesAPI from "../../utilities/incomes-api";
 
-export default function IncomeForm({ addIncome }) {
-  const [incomeFormData, setIncomeFormData] = useState({
-    description: "",
-    amount: "",
-    category: "",
-    account: "",
-    notes: "",
+export default function IncomeForm({
+  addIncome,
+  selectedIncome,
+  setSelectedIncome,
+  setShowModal,
+}) {
+  const [incomeFormData, setIncomeFormData] = useState(() => {
+    if (selectedIncome) {
+      return {
+        description: selectedIncome.description,
+        amount: selectedIncome.amount,
+        category: selectedIncome.category,
+        account: selectedIncome.account,
+        notes: selectedIncome.notes,
+      };
+    } else {
+      return {
+        description: "",
+        amount: "",
+        category: "",
+        account: "",
+        notes: "",
+      };
+    }
   });
 
-  const handleChange = (event) => {
+  useEffect(() => {
+    if (selectedIncome) {
+      setIncomeFormData(selectedIncome);
+    }
+  }, [selectedIncome]);
+
+  async function handleChange(event) {
     setIncomeFormData({
       ...incomeFormData,
       [event.target.name]: event.target.value,
     });
-  };
+  }
 
-  const handleSubmit = async (event) => {
-    event.preventDefault();
+  async function handleUpdate(incomeFormData) {
     try {
-      const income = await incomesAPI.createIncome(incomeFormData);
-      console.log("Income saved:", income);
-      addIncome(income);
+      const updatedIncome = await incomesAPI.updateIncome(
+        selectedIncome._id,
+        incomeFormData
+      );
+      console.log("Income updated:", updatedIncome);
+      addIncome(updatedIncome);
       setIncomeFormData({
         description: "",
         amount: "",
@@ -30,14 +55,40 @@ export default function IncomeForm({ addIncome }) {
         account: "",
         notes: "",
       });
+      setShowModal(false);
+      setSelectedIncome(null);
     } catch (err) {
-      console.error("Error saving income:", err);
+      console.error("Error updating income:", err);
     }
-  };
+  }
+
+  async function handleSubmit(event) {
+    event.preventDefault();
+    if (selectedIncome) {
+      handleUpdate(incomeFormData);
+    } else {
+      try {
+        const income = await incomesAPI.createIncome(incomeFormData);
+        console.log("Income saved:", income);
+        addIncome(income);
+        setIncomeFormData({
+          description: "",
+          amount: "",
+          category: "",
+          account: "",
+          notes: "",
+        });
+        setShowModal(false);
+        setSelectedIncome(null);
+      } catch (err) {
+        console.error("Error saving income:", err);
+      }
+    }
+  }
 
   return (
     <>
-      <h3>Add Income</h3>
+      <h3>{selectedIncome ? "Edit Income" : "Add Income"}</h3>
       <form onSubmit={handleSubmit}>
         <label htmlFor="description">Description</label>
         <input

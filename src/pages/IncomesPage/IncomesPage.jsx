@@ -7,6 +7,7 @@ import "./IncomesPage.css";
 export default function IncomesPage() {
   const [incomes, setIncomes] = useState([]);
   const [showModal, setShowModal] = useState(false);
+  const [selectedIncome, setSelectedIncome] = useState(null);
 
   useEffect(() => {
     async function fetchIncomes() {
@@ -42,15 +43,21 @@ export default function IncomesPage() {
     }
   }
 
-  function toggleIncomeForm() {
-    setShowModal((prevShowModal) => !prevShowModal);
+  function handleToggleModal() {
+    setShowModal(prevShowModal => !prevShowModal);
+    setSelectedIncome(null);
+  }
+
+  function handleEdit(income) {
+    setSelectedIncome(income);
+    setShowModal(true);
   }
 
   return (
     <div className="IncomePage">
       <h1>Income</h1>
       <IncomesFilterForm />
-      <button onClick={toggleIncomeForm}><i class="fa-solid fa-plus"></i> Add Income</button>
+      <button onClick={handleToggleModal}><i class="fa-solid fa-plus"></i> Add Income</button>
       <div>
         <h3>Your Income</h3>
         <ul>
@@ -78,7 +85,7 @@ export default function IncomesPage() {
               <button onClick={() => handleDelete(income._id)}>
                 <i class="fa-solid fa-trash"></i>
               </button>
-              <button>
+              <button onClick={() => handleEdit(income)}>
                 <i class="fa-solid fa-pen-to-square"></i>
               </button>
             </div>
@@ -89,10 +96,15 @@ export default function IncomesPage() {
       {showModal ? (
         <div className="modal">
           <div className="modal-content">
-            <span className="close" onClick={toggleIncomeForm}>
+            <span className="close" onClick={handleToggleModal}>
               &times;
             </span>
-            <IncomeForm addIncome={addIncome} />
+            <IncomeForm 
+              addIncome={addIncome}
+              selectedIncome={selectedIncome}
+              setSelectedIncome={setSelectedIncome}
+              setShowModal={setShowModal}
+             />
           </div>
         </div>
       ) : null}

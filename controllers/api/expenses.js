@@ -4,7 +4,7 @@ module.exports = {
   create,
   index,
   delete: deleteExpense,
-  update,
+  update
 };
 
 async function create(req, res) {
@@ -20,7 +20,7 @@ async function create(req, res) {
     const savedExpense = await expense.save();
     res.json(savedExpense);
   } catch (err) {
-    res.status(400).json({ error: "Error submitting expense form." });
+    res.status(400).json({ error: "Error submitting expense form" });
   }
 }
 
@@ -33,7 +33,7 @@ async function index(req, res) {
   } catch (error) {
     console.error(error);
     res.status(500).json({
-      error: "Internal Server Error: Failed to retrieve list of expenses.",
+      error: "Failed to retrieve list of expenses",
     });
   }
 }

@@ -4,6 +4,7 @@ module.exports = {
   create,
   index,
   delete: deleteIncome,
+  update,
 };
 
 async function create(req, res) {
@@ -32,11 +33,9 @@ async function index(req, res) {
     res.json(incomes);
   } catch (error) {
     console.error(error);
-    res
-      .status(500)
-      .json({
-        error: "Internal Server Error: Failed to retrieve list of incomes.",
-      });
+    res.status(500).json({
+      error: "Failed to retrieve list of incomes",
+    });
   }
 }
 
@@ -53,6 +52,21 @@ async function deleteIncome(req, res) {
     });
   } catch (error) {
     console.error(error);
-    res.status(500).json({ error: "Server error" });
+    res.status(500).json({ error: "Error deleting income" });
+  }
+}
+
+async function update(req, res) {
+  try {
+    const income = await Income.findById(req.params.id);
+    income.description = req.body.description;
+    income.amount = req.body.amount;
+    income.category = req.body.category;
+    income.account = req.body.account;
+    income.notes = req.body.notes;
+    const updatedIncome = await income.save();
+    res.json(updatedIncome);
+  } catch (error) {
+    res.status(500).json({ error: "Error updating income" });
   }
 }

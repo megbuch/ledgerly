@@ -105,8 +105,8 @@ export default function ExpensesPage() {
             <ExpenseForm
               addExpense={addExpense}
               selectedExpense={selectedExpense}
-              setShowModal={setShowModal}
               setSelectedExpense={setSelectedExpense}
+              setShowModal={setShowModal}
             />
           </div>
         </div>
