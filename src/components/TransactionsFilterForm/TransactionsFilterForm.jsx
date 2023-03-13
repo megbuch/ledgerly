@@ -4,6 +4,8 @@ export default function ExpensesFilterForm({
   categories,
   selectedCategory,
   setSelectedCategory,
+  selectedType,
+  setSelectedType,
   setSelectedDateRange,
 }) {
   const [startDate, setStartDate] = useState("");
@@ -12,6 +14,11 @@ export default function ExpensesFilterForm({
   function handleCategoryChange(event) {
     const category = event.target.value;
     setSelectedCategory(category);
+  }
+
+  function handleTypeChange(event) {
+    const type = event.target.value;
+    setSelectedType(type);
   }
 
   function handleStartDateChange(event) {
@@ -48,6 +55,17 @@ export default function ExpensesFilterForm({
               {category}
             </option>
           ))}
+        </select>
+        <label htmlFor="type">Type</label>
+        <select
+          id="type"
+          name="type"
+          value={selectedType}
+          onChange={handleTypeChange}
+        >
+          <option value="">All</option>
+          <option value="expense">Expense</option>
+          <option value="income">Income</option>
         </select>
         <label htmlFor="start-date">Start Date</label>
         <input
