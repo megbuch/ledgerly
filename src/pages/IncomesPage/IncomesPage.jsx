@@ -112,7 +112,9 @@ export default function IncomesPage() {
       <div>
         <h3>Your Income</h3>
         <div>
-          <p>Total Income: ${totalIncomes}</p>
+          <p>
+            Total Income: <strong>${totalIncomes}</strong>
+          </p>
         </div>
         <ul>
           {filteredIncomes.map((income) => (

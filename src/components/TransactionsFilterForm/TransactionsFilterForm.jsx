@@ -15,11 +15,6 @@ export default function ExpensesFilterForm({
     setSelectedCategory(category);
   }
 
-  function handleTypeChange(event) {
-    const type = event.target.value;
-    setSelectedType(type);
-  }
-
   function handleStartDateChange(event) {
     const date = event.target.value;
     setStartDate(date);

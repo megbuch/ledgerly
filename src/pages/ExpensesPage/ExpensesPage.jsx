@@ -111,7 +111,9 @@ export default function ExpensesPage() {
       <div>
         <h3>Your Expenses</h3>
         <div>
-          <p>Total Expenses: ${totalExpenses}</p>
+          <p>
+            Total Expenses: <strong>- ${totalExpenses}</strong>
+          </p>
         </div>
         <ul>
           {filteredExpenses.map((expense) => (
