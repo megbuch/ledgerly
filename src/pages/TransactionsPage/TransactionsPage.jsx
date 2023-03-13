@@ -9,6 +9,16 @@ export default function TransactionsPage() {
   const [selectedType, setSelectedType] = useState("");
   const [selectedDateRange, setSelectedDateRange] = useState({});
 
+  const incomeTotal = transactions
+  .filter((transaction) => transaction.type === "income")
+  .reduce((total, transaction) => total + transaction.amount, 0);
+
+const expenseTotal = transactions
+  .filter((transaction) => transaction.type === "expense")
+  .reduce((total, transaction) => total + transaction.amount, 0);
+
+const cashFlow = incomeTotal - expenseTotal;
+
   const categories = ["All Categories"];
   for (let i = 0; i < transactions.length; i++) {
     if (!categories.includes(transactions[i].category)) {
@@ -48,6 +58,7 @@ export default function TransactionsPage() {
       />
       <div>
         <h3>Your Transactions</h3>
+        <p>Cash Flow: {cashFlow}</p>
         <ul>
           {transactions
           .filter((transaction) => {

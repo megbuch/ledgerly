@@ -10,6 +10,7 @@ export default function ExpensesPage() {
   const [selectedExpense, setSelectedExpense] = useState(null);
   const [selectedCategory, setSelectedCategory] = useState("");
   const [selectedDateRange, setSelectedDateRange] = useState({});
+  const [totalExpenses, setTotalExpenses] = useState(0);
 
   const categories = ["All Categories"];
   for (let i = 0; i < expenses.length; i++) {
@@ -30,6 +31,38 @@ export default function ExpensesPage() {
 
     fetchExpenses();
   }, []);
+
+  useEffect(() => {
+    let filteredExpenses = expenses.filter((expense) => {
+      if (selectedCategory !== "" && expense.category !== selectedCategory) {
+        return false;
+      }
+
+      if (
+        selectedDateRange.startDate !== "" &&
+        selectedDateRange.endDate !== ""
+      ) {
+        const expenseDate = new Date(expense.date);
+        const startDate = new Date(selectedDateRange.startDate);
+        const endDate = new Date(selectedDateRange.endDate);
+
+        if (expenseDate < startDate || expenseDate > endDate) {
+          return false;
+        }
+      }
+
+      return true;
+    });
+
+    let total = 0;
+    for (let i = 0; i < filteredExpenses.length; i++) {
+      total += filteredExpenses[i].amount;
+    }
+    setTotalExpenses(total);
+    setFilteredExpenses(filteredExpenses);
+  }, [expenses, selectedCategory, selectedDateRange]);
+
+  const [filteredExpenses, setFilteredExpenses] = useState([]);
 
   async function addExpense(expense) {
     setExpenses((prevExpenses) => [...prevExpenses, expense]);
@@ -77,62 +110,41 @@ export default function ExpensesPage() {
       </button>
       <div>
         <h3>Your Expenses</h3>
+        <div>
+          <p>Total Expenses: ${totalExpenses}</p>
+        </div>
         <ul>
-          {expenses
-            .filter((expense) => {
-              if (
-                selectedCategory !== "" &&
-                expense.category !== selectedCategory
-              ) {
-                return false;
-              }
-
-              if (
-                selectedDateRange.startDate !== "" &&
-                selectedDateRange.endDate !== ""
-              ) {
-                const expenseDate = new Date(expense.date);
-                const startDate = new Date(selectedDateRange.startDate);
-                const endDate = new Date(selectedDateRange.endDate);
-
-                if (expenseDate < startDate || expenseDate > endDate) {
-                  return false;
-                }
-              }
-
-              return true;
-            })
-            .map((expense) => (
-              <div key={expense._id} className="card">
+          {filteredExpenses.map((expense) => (
+            <div key={expense._id} className="card">
+              <p>
+                <strong>{expense.description}</strong>
+                <span>
+                  <i class="fa-solid fa-dollar-sign"></i> {expense.amount}
+                </span>
+              </p>
+              <p>
+                <i class="fa-solid fa-calendar"></i>
+                {expense.date.slice(0, 10)}
+              </p>
+              <p>
+                <i class="fa-solid fa-folder"></i> {expense.category}
+              </p>
+              <p>
+                <i class="fa-solid fa-receipt"></i> {expense.account}
+              </p>
+              {expense.notes ? (
                 <p>
-                  <strong>{expense.description}</strong>
-                  <span>
-                    <i class="fa-solid fa-dollar-sign"></i> {expense.amount}
-                  </span>
+                  <i class="fa-solid fa-comment"></i> {expense.notes}
                 </p>
-                <p>
-                  <i class="fa-solid fa-calendar"></i>
-                  {expense.date.slice(0, 10)}
-                </p>
-                <p>
-                  <i class="fa-solid fa-folder"></i> {expense.category}
-                </p>
-                <p>
-                  <i class="fa-solid fa-receipt"></i> {expense.account}
-                </p>
-                {expense.notes ? (
-                  <p>
-                    <i class="fa-solid fa-comment"></i> {expense.notes}
-                  </p>
-                ) : null}
-                <button onClick={() => handleDelete(expense._id)}>
-                  <i class="fa-solid fa-trash"></i>
-                </button>
-                <button onClick={() => handleEdit(expense)}>
-                  <i class="fa-solid fa-pen-to-square"></i>
-                </button>
-              </div>
-            ))}
+              ) : null}
+              <button onClick={() => handleDelete(expense._id)}>
+                <i class="fa-solid fa-trash"></i>
+              </button>
+              <button onClick={() => handleEdit(expense)}>
+                <i class="fa-solid fa-pen-to-square"></i>
+              </button>
+            </div>
+          ))}
         </ul>
       </div>
 
