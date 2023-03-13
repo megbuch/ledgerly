@@ -3,7 +3,6 @@ const path = require("path");
 const favicon = require("serve-favicon");
 const logger = require("morgan");
 const methodOverride = require("method-override");
-const moment = require("moment");
 
 require("dotenv").config();
 require("./config/database");
