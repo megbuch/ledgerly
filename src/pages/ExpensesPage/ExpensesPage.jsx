@@ -9,6 +9,7 @@ export default function ExpensesPage() {
   const [showModal, setShowModal] = useState(false);
   const [selectedExpense, setSelectedExpense] = useState(null);
   const [selectedCategory, setSelectedCategory] = useState("");
+  const [selectedDateRange, setSelectedDateRange] = useState({});
 
   const categories = ["All Categories"];
   for (let i = 0; i < expenses.length; i++) {
@@ -68,6 +69,8 @@ export default function ExpensesPage() {
         categories={categories}
         selectedCategory={selectedCategory}
         setSelectedCategory={setSelectedCategory}
+        selectedDateRange={selectedDateRange}
+        setSelectedDateRange={setSelectedDateRange}
       />
       <button onClick={handleToggleModal}>
         <i class="fa-solid fa-plus"></i> Add Expense
@@ -76,10 +79,29 @@ export default function ExpensesPage() {
         <h3>Your Expenses</h3>
         <ul>
           {expenses
-            .filter(
-              (expense) =>
-                selectedCategory === "" || expense.category === selectedCategory
-            )
+            .filter((expense) => {
+              if (
+                selectedCategory !== "" &&
+                expense.category !== selectedCategory
+              ) {
+                return false;
+              }
+
+              if (
+                selectedDateRange.startDate !== "" &&
+                selectedDateRange.endDate !== ""
+              ) {
+                const expenseDate = new Date(expense.date);
+                const startDate = new Date(selectedDateRange.startDate);
+                const endDate = new Date(selectedDateRange.endDate);
+
+                if (expenseDate < startDate || expenseDate > endDate) {
+                  return false;
+                }
+              }
+
+              return true;
+            })
             .map((expense) => (
               <div key={expense._id} className="card">
                 <p>
