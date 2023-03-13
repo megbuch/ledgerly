@@ -12,7 +12,7 @@ With Ledgerly, tax season is a breeze.
   <li>User-friendly interface and accessible for users of all experience levels</li>
 </ul>
 
-## Technologies Used
+## Technologies Used 👩‍💻
 <ul>
   <li>MongoDB</li>
   <li>Express.js</li>
@@ -22,6 +22,6 @@ With Ledgerly, tax season is a breeze.
 
 ## Get Started
 
-## Responsive Design
+## Responsive Design 📱
 
-## What's Next?
+## What's Next? 🤔
