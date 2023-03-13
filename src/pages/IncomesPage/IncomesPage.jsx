@@ -90,7 +90,7 @@ export default function IncomesPage() {
                 </p>
                 <p>
                   <i class="fa-solid fa-calendar"></i>
-                  {new Date(income.date).toLocaleDateString()}
+                  {income.date.slice(0, 10)}
                 </p>
                 <p>
                   <i class="fa-solid fa-folder"></i> {income.category}
@@ -119,6 +119,8 @@ export default function IncomesPage() {
               &times;
             </span>
             <IncomeForm
+              incomes={incomes}
+              setIncomes={setIncomes}
               addIncome={addIncome}
               selectedIncome={selectedIncome}
               setSelectedIncome={setSelectedIncome}

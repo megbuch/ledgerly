@@ -12,6 +12,7 @@ async function create(req, res) {
     description: req.body.description,
     amount: req.body.amount,
     category: req.body.category,
+    date: req.body.date,
     account: req.body.account,
     notes: req.body.notes,
     user: req.user._id,
@@ -62,6 +63,7 @@ async function update(req, res) {
     income.description = req.body.description;
     income.amount = req.body.amount;
     income.category = req.body.category;
+    income.date = req.body.date;
     income.account = req.body.account;
     income.notes = req.body.notes;
     const updatedIncome = await income.save();

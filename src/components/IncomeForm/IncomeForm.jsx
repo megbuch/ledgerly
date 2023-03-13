@@ -2,6 +2,8 @@ import React, { useState, useEffect } from "react";
 import * as incomesAPI from "../../utilities/incomes-api";
 
 export default function IncomeForm({
+  incomes,
+  setIncomes,
   addIncome,
   selectedIncome,
   setSelectedIncome,
@@ -13,7 +15,7 @@ export default function IncomeForm({
         description: selectedIncome.description,
         amount: selectedIncome.amount,
         category: selectedIncome.category,
-        date: selectedIncome.category,
+        date: selectedIncome.date,
         account: selectedIncome.account,
         notes: selectedIncome.notes,
       };
@@ -42,14 +44,28 @@ export default function IncomeForm({
     });
   }
 
+  async function updateIncome(updatedIncome) {
+    try {
+      const updatedIncomes = incomes.map((income) => {
+        if (income._id === updatedIncome._id) {
+          return { ...updatedIncome };
+        } else {
+          return income;
+        }
+      });
+      setIncomes(updatedIncomes);
+    } catch (err) {
+      console.error("Error updating income", err);
+    }
+  }
+
   async function handleUpdate(incomeFormData) {
     try {
-      const updatedIncome = await incomesAPI.updateIncome(
-        selectedIncome._id,
-        incomeFormData
-      );
+      const updatedIncome = await incomesAPI.updateIncome(selectedIncome._id, {
+        ...incomeFormData,
+      });
+      updateIncome(updatedIncome);
       console.log("Income updated:", updatedIncome);
-      addIncome(updatedIncome);
       setIncomeFormData({
         description: "",
         amount: "",
@@ -134,7 +150,11 @@ export default function IncomeForm({
           type="date"
           id="date"
           name="date"
-          value={incomeFormData.date}
+          value={
+            incomeFormData.date
+              ? new Date(incomeFormData.date).toISOString().slice(0, 10)
+              : ""
+          }
           onChange={handleChange}
           required
         />

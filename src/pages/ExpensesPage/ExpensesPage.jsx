@@ -89,11 +89,11 @@ export default function ExpensesPage() {
                   </span>
                 </p>
                 <p>
-                  <i class="fa-solid fa-folder"></i> {expense.category}
+                  <i class="fa-solid fa-calendar"></i>
+                  {expense.date.slice(0, 10)}
                 </p>
                 <p>
-                  <i class="fa-solid fa-calendar"></i>
-                  {expense.date.slice(0,10)}
+                  <i class="fa-solid fa-folder"></i> {expense.category}
                 </p>
                 <p>
                   <i class="fa-solid fa-receipt"></i> {expense.account}
