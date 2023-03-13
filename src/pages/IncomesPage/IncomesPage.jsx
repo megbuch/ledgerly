@@ -9,6 +9,7 @@ export default function IncomesPage() {
   const [showModal, setShowModal] = useState(false);
   const [selectedIncome, setSelectedIncome] = useState(null);
   const [selectedCategory, setSelectedCategory] = useState("");
+  const [selectedDateRange, setSelectedDateRange] = useState({});
 
   const categories = ["All Categories"];
   for (let i = 0; i < incomes.length; i++) {
@@ -68,6 +69,8 @@ export default function IncomesPage() {
         categories={categories}
         selectedCategory={selectedCategory}
         setSelectedCategory={setSelectedCategory}
+        selectedDateRange={selectedDateRange}
+        setSelectedDateRange={setSelectedDateRange}
       />
       <button onClick={handleToggleModal}>
         <i class="fa-solid fa-plus"></i> Add Income
@@ -76,10 +79,29 @@ export default function IncomesPage() {
         <h3>Your Income</h3>
         <ul>
           {incomes
-            .filter(
-              (income) =>
-                selectedCategory === "" || income.category === selectedCategory
-            )
+            .filter((income) => {
+              if (
+                selectedCategory !== "" &&
+                income.category !== selectedCategory
+              ) {
+                return false;
+              }
+
+              if (
+                selectedDateRange.startDate !== "" &&
+                selectedDateRange.endDate !== ""
+              ) {
+                const incomeDate = new Date(income.date);
+                const startDate = new Date(selectedDateRange.startDate);
+                const endDate = new Date(selectedDateRange.endDate);
+
+                if (incomeDate < startDate || incomeDate > endDate) {
+                  return false;
+                }
+              }
+
+              return true;
+            })
             .map((income) => (
               <div key={income._id} className="card">
                 <p>
