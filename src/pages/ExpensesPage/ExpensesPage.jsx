@@ -98,9 +98,11 @@ export default function ExpensesPage() {
                 <p>
                   <i class="fa-solid fa-receipt"></i> {expense.account}
                 </p>
-                <p>
-                  <i class="fa-solid fa-comment"></i> {expense.notes}
-                </p>
+                {expense.notes ? (
+                  <p>
+                    <i class="fa-solid fa-comment"></i> {expense.notes}
+                  </p>
+                ) : null}
                 <button onClick={() => handleDelete(expense._id)}>
                   <i class="fa-solid fa-trash"></i>
                 </button>

@@ -98,9 +98,11 @@ export default function IncomesPage() {
                 <p>
                   <i class="fa-solid fa-receipt"></i> {income.account}
                 </p>
-                <p>
-                  <i class="fa-solid fa-comment"></i> {income.notes}
-                </p>
+                {income.notes ? (
+                  <p>
+                    <i class="fa-solid fa-comment"></i> {income.notes}
+                  </p>
+                ) : null}
                 <button onClick={() => handleDelete(income._id)}>
                   <i class="fa-solid fa-trash"></i>
                 </button>

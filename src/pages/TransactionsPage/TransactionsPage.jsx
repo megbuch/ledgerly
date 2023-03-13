@@ -33,16 +33,25 @@ export default function TransactionsPage() {
             <div key={transaction._id} className="card">
               <p>
                 <strong>{transaction.description}</strong>
-                <span><i class="fa-solid fa-dollar-sign"></i> {transaction.amount}</span>
+                <span>
+                  <i class="fa-solid fa-dollar-sign"></i> {transaction.amount}
+                </span>
               </p>
-              <p><i class="fa-solid fa-calendar"></i> {new Date(transaction.date).toDateString()}</p>
-              <p><i class="fa-solid fa-folder"></i> {transaction.category}</p>
-              <p><i class="fa-solid fa-folder"></i> {transaction.date}</p>
-              <p><i class="fa-solid fa-receipt"></i> {transaction.account}</p>
-              <p><i class="fa-solid fa-comment"></i> {transaction.notes}</p>
-              <button>
-                <i class="fa-solid fa-trash"></i>
-              </button>
+              <p>
+                <i class="fa-solid fa-calendar"></i>
+                {transaction.date.slice(0, 10)}
+              </p>
+              <p>
+                <i class="fa-solid fa-folder"></i> {transaction.category}
+              </p>
+              <p>
+                <i class="fa-solid fa-receipt"></i> {transaction.account}
+              </p>
+              {transaction.notes ? (
+                <p>
+                  <i class="fa-solid fa-comment"></i> {transaction.notes}
+                </p>
+              ) : null}
             </div>
           ))}
         </ul>
