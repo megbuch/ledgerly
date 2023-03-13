@@ -80,8 +80,8 @@ export default function IncomesPage() {
               (income) =>
                 selectedCategory === "" || income.category === selectedCategory
             )
-            .map((income, index) => (
-              <div key={index} className="card">
+            .map((income) => (
+              <div key={income._id} className="card">
                 <p>
                   <strong>{income.description}</strong>
                   <span>
@@ -90,7 +90,7 @@ export default function IncomesPage() {
                 </p>
                 <p>
                   <i class="fa-solid fa-calendar"></i>
-                  {new Date(income.date).toDateString()}
+                  {new Date(income.date).toLocaleDateString()}
                 </p>
                 <p>
                   <i class="fa-solid fa-folder"></i> {income.category}

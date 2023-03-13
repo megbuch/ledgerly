@@ -2,6 +2,8 @@ import { useState, useEffect } from "react";
 import * as expensesAPI from "../../utilities/expenses-api";
 
 export default function ExpenseForm({
+  expenses,
+  setExpenses,
   addExpense,
   selectedExpense,
   setSelectedExpense,
@@ -42,14 +44,29 @@ export default function ExpenseForm({
     });
   }
 
+  async function updateExpense(updatedExpense) {
+    try {
+      const updatedExpenses = expenses.map((expense) => {
+        if (expense._id === updatedExpense._id) {
+          return { ...updatedExpense };
+        } else {
+          return expense;
+        }
+      });
+      setExpenses(updatedExpenses);
+    } catch (err) {
+      console.error("Error updating expense", err);
+    }
+  }
+
   async function handleUpdate(expenseFormData) {
     try {
       const updatedExpense = await expensesAPI.updateExpense(
         selectedExpense._id,
-        expenseFormData
+        { ...expenseFormData }
       );
+      updateExpense(updatedExpense);
       console.log("Expense updated:", updatedExpense);
-      addExpense(updatedExpense);
       setExpenseFormData({
         description: "",
         amount: "",
@@ -150,7 +167,11 @@ export default function ExpenseForm({
           type="date"
           id="date"
           name="date"
-          value={expenseFormData.date}
+          value={
+            expenseFormData.date
+              ? new Date(expenseFormData.date).toISOString().slice(0, 10)
+              : ""
+          }
           onChange={handleChange}
           required
         />

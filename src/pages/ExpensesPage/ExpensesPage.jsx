@@ -80,8 +80,8 @@ export default function ExpensesPage() {
               (expense) =>
                 selectedCategory === "" || expense.category === selectedCategory
             )
-            .map((expense, index) => (
-              <div key={index} className="card">
+            .map((expense) => (
+              <div key={expense._id} className="card">
                 <p>
                   <strong>{expense.description}</strong>
                   <span>
@@ -93,7 +93,7 @@ export default function ExpensesPage() {
                 </p>
                 <p>
                   <i class="fa-solid fa-calendar"></i>
-                  {expense.date}
+                  {expense.date.slice(0,10)}
                 </p>
                 <p>
                   <i class="fa-solid fa-receipt"></i> {expense.account}
@@ -119,6 +119,8 @@ export default function ExpensesPage() {
               &times;
             </span>
             <ExpenseForm
+              expenses={expenses}
+              setExpenses={setExpenses}
               addExpense={addExpense}
               selectedExpense={selectedExpense}
               setSelectedExpense={setSelectedExpense}

@@ -62,6 +62,7 @@ async function update(req, res) {
     expense.description = req.body.description;
     expense.amount = req.body.amount;
     expense.category = req.body.category;
+    expense.date = req.body.date;
     expense.account = req.body.account;
     expense.notes = req.body.notes;
     const updatedExpense = await expense.save();
