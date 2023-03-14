@@ -1,0 +1,13 @@
+.SignUpForm {
+    width: 30em;
+    margin: 0 auto;
+    background-color: white;
+    color: black;
+    padding: 2em 1em 0.5em 1em;
+    margin: 2em;
+    border-radius: 8px;
+}
+
+.SignUpForm > h1, .SignUpForm > h3 {
+    margin: 0;
+}

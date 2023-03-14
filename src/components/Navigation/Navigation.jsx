@@ -12,7 +12,10 @@ export default function NavBar({ user, setUser }) {
     <nav>
       <div className="Navigation">
         <h1>Ledgerly</h1>
-        <h3>Hello, {user.name}!</h3>
+        <h3>
+          {user.name}&nbsp;|&nbsp;{user.businessName}&nbsp;&nbsp;
+          <i class="fa-solid fa-shop"></i>
+        </h3>
       </div>
       <div className="Navigation">
         <Link to="/">Dashboard</Link>

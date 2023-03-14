@@ -1,4 +1,6 @@
 .ExpensesPage {
-    display: flex;
-    flex-direction: column;
+  display: flex;
+  flex-direction: column;
+  width: 40%;
+  margin: 2em 3em;
 }

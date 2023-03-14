@@ -1,48 +1,57 @@
-@import url('https://fonts.googleapis.com/css2?family=Berkshire+Swash&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Berkshire+Swash&display=swap");
 
 .Navigation > a {
-    color: white;
+  color: white;
+  font-size: 1.2em;
+  padding-right: 1em;
+  border-right: 2px solid transparent;
 }
 
 .Navigation > a:hover {
-    color:#d9ff7f;
+  color: #d9ff7f;
+}
+
+.Navigation > a:focus {
+  color: #d9ff7f;
+  border-right: 2px solid #d9ff7f;
 }
 
 nav {
-    display: flex;
-    flex-direction: column;
-    gap: 15em;
-    min-height: 100vh;
-    width: 18em;
-    margin: 0;
-    text-align: right;
-    padding: 1em;
-    background-color: rgb(41, 41, 41);
-    color: white;
+  display: flex;
+  flex-direction: column;
+  gap: 15em;
+  min-height: 100vh;
+  min-width: 30%;
+  margin: 0;
+  text-align: right;
+  padding: 2em 4em;
+  background-color: rgb(41, 41, 41);
+  color: white;
 }
 
 .Navigation {
-    display: flex;
-    flex-direction: column;
-    gap: 1em;
+  display: flex;
+  flex-direction: column;
+  gap: 1em;
 }
 
-.Navigation > h1, .Navigation > h3, .Navigation > h4, .Navigation > p {
-    text-align: center;
-    margin: 0;
+.Navigation > h1,
+.Navigation > h3 {
+  text-align: right;
+  margin: 0;
 }
 
 .Navigation > h1 {
-    color: #d9ff7f;
-    font: 3rem 'Berkshire Swash', 'Poppins', Helvetica, Arial, sans-serif;
+  color: #d9ff7f;
+  font: 4rem "Berkshire Swash", "Poppins", Helvetica, Arial, sans-serif;
 }
 
 .Navigation > h3 {
-    font-size: 1em;
-    font-weight: 300;
+  font-size: 1em;
+  font-weight: 300;
 }
 
 hr {
-    width: 100%;
-    border: 1px solid rgb(75, 75, 75);
+  width: 100%;
+  border: 1px solid rgb(75, 75, 75);
 }

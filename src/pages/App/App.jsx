@@ -25,7 +25,9 @@ export default function App() {
           </Routes>
         </>
       ) : (
-        <AuthPage setUser={setUser} />
+        <div className="AuthPage">
+          <AuthPage setUser={setUser} />
+        </div>
       )}
     </main>
   );

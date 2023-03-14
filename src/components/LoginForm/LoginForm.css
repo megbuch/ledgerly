@@ -1,0 +1,13 @@
+.LoginForm {
+    width: 30em;
+    margin: 0 auto;
+    background-color: white;
+    color: black;
+    padding: 2em 1em 0.5em 1em;
+    margin: 2em;
+    border-radius: 8px;
+}
+
+.LoginForm > h1, .LoginForm > h3 {
+    margin: 0;
+}

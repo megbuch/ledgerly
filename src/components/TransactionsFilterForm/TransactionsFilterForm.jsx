@@ -35,7 +35,6 @@ export default function ExpensesFilterForm({
 
   return (
     <>
-      <h3>Filter</h3>
       <form>
         <label htmlFor="category">Category</label>
         <select
