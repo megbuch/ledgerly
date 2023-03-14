@@ -3,7 +3,6 @@ import { useRef } from "react";
 import * as expensesAPI from "../../utilities/expenses-api";
 import * as incomesAPI from "../../utilities/incomes-api";
 import TransactionsFilterForm from "../../components/TransactionsFilterForm/TransactionsFilterForm";
-import ReactToPrint from "react-to-print";
 
 export default function TransactionsPage() {
   const [transactions, setTransactions] = useState([]);
