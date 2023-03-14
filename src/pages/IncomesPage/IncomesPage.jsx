@@ -54,6 +54,12 @@ export default function IncomesPage() {
       return true;
     });
 
+    filteredIncomes.sort((a, b) => {
+      const dateA = new Date(a.date);
+      const dateB = new Date(b.date);
+      return dateB - dateA;
+    });
+
     let total = 0;
     for (let i = 0; i < filteredIncomes.length; i++) {
       total += filteredIncomes[i].amount;
@@ -98,7 +104,12 @@ export default function IncomesPage() {
 
   return (
     <div className="IncomePage">
-      <h1>Income</h1>
+      <div className="row">
+        <h1>Income</h1>
+        <button className="add-btn" onClick={handleToggleModal}>
+          <i class="fa-solid fa-plus"></i> Add Income
+        </button>
+      </div>
       <IncomesFilterForm
         categories={categories}
         selectedCategory={selectedCategory}
@@ -107,11 +118,9 @@ export default function IncomesPage() {
         setSelectedDateRange={setSelectedDateRange}
       />
       <div>
-        <h3>Your Income</h3>
         <div className="row">
-          <button className="add-btn" onClick={handleToggleModal}>
-            <i class="fa-solid fa-plus"></i> Add Income
-          </button>
+          <h3>Your Income</h3>
+
           <p>
             Total Income: <strong>${totalIncomes}</strong>
           </p>

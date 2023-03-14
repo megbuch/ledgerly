@@ -3,12 +3,14 @@ import { useRef } from "react";
 import * as expensesAPI from "../../utilities/expenses-api";
 import * as incomesAPI from "../../utilities/incomes-api";
 import TransactionsFilterForm from "../../components/TransactionsFilterForm/TransactionsFilterForm";
+import ReactToPrint from "react-to-print";
 
 export default function TransactionsPage() {
   const [transactions, setTransactions] = useState([]);
   const [selectedCategory, setSelectedCategory] = useState("");
   const [selectedDateRange, setSelectedDateRange] = useState({});
   const [filteredTransactions, setFilteredTransactions] = useState([]);
+  const componentRef = useRef(null);
 
   const categories = ["All Categories"];
   for (let i = 0; i < transactions.length; i++) {
@@ -88,8 +90,19 @@ export default function TransactionsPage() {
   }, [transactions, selectedCategory, selectedDateRange]);
 
   return (
-    <div className="TransactionsPage">
-      <h1>Transactions</h1>
+    <div className="TransactionsPage" ref={componentRef}>
+      <div className="row">
+        <h1>Transactions</h1>
+        <ReactToPrint
+          trigger={() => (
+            <button className="add-btn">
+              Generate Financial Report&nbsp;&nbsp;
+              <i class="fa-solid fa-print"></i>
+            </button>
+          )}
+          content={() => componentRef.current}
+        />
+      </div>
       <TransactionsFilterForm
         categories={categories}
         selectedCategory={selectedCategory}
@@ -97,7 +110,6 @@ export default function TransactionsPage() {
         selectedDateRange={selectedDateRange}
         setSelectedDateRange={setSelectedDateRange}
       />
-
       <div>
         <h3>Your Transactions</h3>
         <div className="row">
@@ -105,11 +117,11 @@ export default function TransactionsPage() {
             Income: <strong>${incomeTotal}</strong>
           </p>
           <p>
-            Expenses: <strong>$-{expensesTotal}</strong>
+            Expenses: <strong>${expensesTotal}</strong>
           </p>
           <p>
             Cash Flow:{" "}
-            <strong style={{ color: cashFlow < 0 ? "#eb3c3c" : "inherit" }}>
+            <strong style={{ color: cashFlow <= 0 ? "#eb3c3c" : "#40b94a" }}>
               ${cashFlow}
             </strong>
           </p>

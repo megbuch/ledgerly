@@ -18,7 +18,7 @@ export default function App() {
         <>
           <Navigation user={user} setUser={setUser} />
           <Routes className="Routes">
-            <Route path="/" element={<DashboardPage />} />
+            <Route path="/" element={<DashboardPage user={user} />} />
             <Route path="/transactions" element={<TransactionsPage />} />
             <Route path="/income" element={<IncomesPage />} />
             <Route path="/expenses" element={<ExpensesPage />} />

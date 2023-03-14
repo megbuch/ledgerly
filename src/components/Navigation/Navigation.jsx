@@ -12,15 +12,16 @@ export default function NavBar({ user, setUser }) {
     <nav>
       <div className="Navigation">
         <h1>Ledgerly</h1>
-        <h3>Welcome, {user.name}</h3>
-        <h4>{user.businessName}</h4>
+        <h3>Hello, {user.name}!</h3>
       </div>
       <div className="Navigation">
         <Link to="/">Dashboard</Link>
         <Link to="/transactions">Transactions</Link>
         <Link to="/income">Income</Link>
         <Link to="/expenses">Expenses</Link>
-        <Link to="" onClick={handleLogOut}><i class="fa-solid fa-right-from-bracket"></i> Log Out</Link>
+        <Link to="" onClick={handleLogOut}>
+          <i class="fa-solid fa-right-from-bracket"></i> Log Out
+        </Link>
       </div>
     </nav>
   );

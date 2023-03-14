@@ -54,6 +54,12 @@ export default function ExpensesPage() {
       return true;
     });
 
+    filteredExpenses.sort((a, b) => {
+      const dateA = new Date(a.date);
+      const dateB = new Date(b.date);
+      return dateB - dateA;
+    });
+
     let total = 0;
     for (let i = 0; i < filteredExpenses.length; i++) {
       total += filteredExpenses[i].amount;
@@ -97,7 +103,12 @@ export default function ExpensesPage() {
 
   return (
     <div className="ExpensesPage">
-      <h1>Expenses</h1>
+      <div className="row">
+        <h1>Expenses</h1>
+        <button className="add-btn" onClick={handleToggleModal}>
+          <i class="fa-solid fa-plus"></i> Add Expense
+        </button>
+      </div>
       <ExpensesFilterForm
         categories={categories}
         selectedCategory={selectedCategory}
@@ -106,13 +117,10 @@ export default function ExpensesPage() {
         setSelectedDateRange={setSelectedDateRange}
       />
       <div>
-        <h3>Your Expenses</h3>
         <div className="row">
-          <button className="add-btn" onClick={handleToggleModal}>
-            <i class="fa-solid fa-plus"></i> Add Expense
-          </button>
+          <h3>Your Expenses</h3>
           <p>
-            Total Expenses: <strong>- ${totalExpenses}</strong>
+            Total Expenses: <strong>${totalExpenses}</strong>
           </p>
         </div>
         <ul>
