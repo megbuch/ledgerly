@@ -119,6 +119,7 @@ export default function IncomesPage() {
         <ul>
           {filteredIncomes.map((income) => (
             <div key={income._id} className="card">
+              <div className="green-bar"></div>
               <div className="row">
                 <div className="row">
                   <p>

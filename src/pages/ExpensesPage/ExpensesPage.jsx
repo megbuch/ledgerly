@@ -118,6 +118,7 @@ export default function ExpensesPage() {
         <ul>
           {filteredExpenses.map((expense) => (
             <div key={expense._id} className="card">
+              <div className="red-bar"></div>
               <div className="row">
                 <div className="row">
                   <p>

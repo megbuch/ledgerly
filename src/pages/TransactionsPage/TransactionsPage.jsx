@@ -1,7 +1,9 @@
 import { useState, useEffect } from "react";
+import { useRef } from "react";
 import * as expensesAPI from "../../utilities/expenses-api";
 import * as incomesAPI from "../../utilities/incomes-api";
-import TransactionsFilterForm from "../../components/ExpensesFilterForm/ExpensesFilterForm";
+import TransactionsFilterForm from "../../components/TransactionsFilterForm/TransactionsFilterForm";
+import ReactToPrint from "react-to-print";
 
 export default function TransactionsPage() {
   const [transactions, setTransactions] = useState([]);
@@ -96,13 +98,23 @@ export default function TransactionsPage() {
         selectedDateRange={selectedDateRange}
         setSelectedDateRange={setSelectedDateRange}
       />
+
       <div>
         <h3>Your Transactions</h3>
-        <p>
-          Income: <strong>${incomeTotal}</strong>
-          Expenses: <strong>$-{expensesTotal}</strong>
-          Cash Flow: <strong>${cashFlow}</strong>
-        </p>
+        <div className="row">
+          <p>
+            Income: <strong>${incomeTotal}</strong>
+          </p>
+          <p>
+            Expenses: <strong>$-{expensesTotal}</strong>
+          </p>
+          <p>
+            Cash Flow:{" "}
+            <strong style={{ color: cashFlow < 0 ? "#eb3c3c" : "inherit" }}>
+              ${cashFlow}
+            </strong>
+          </p>
+        </div>
         <ul>
           {transactions
             .filter((transaction) => {
@@ -130,27 +142,39 @@ export default function TransactionsPage() {
             })
             .map((transaction) => (
               <div key={transaction._id} className="card">
-                <p>
-                  <strong>{transaction.description}</strong>
-                  <span>
-                    <i class="fa-solid fa-dollar-sign"></i> {transaction.amount}
-                  </span>
-                </p>
-                <p>
-                  <i class="fa-solid fa-calendar"></i>
-                  {transaction.date.slice(0, 10)}
-                </p>
-                <p>
-                  <i class="fa-solid fa-folder"></i> {transaction.category}
-                </p>
-                <p>
-                  <i class="fa-solid fa-receipt"></i> {transaction.account}
-                </p>
-                {transaction.notes ? (
+                <div
+                  className={`${
+                    transaction.isExpense ? "red-bar" : "green-bar"
+                  }`}
+                ></div>
+                <div className="row">
+                  <div className="row">
+                    <p>
+                      <strong>{transaction.description}</strong>
+                    </p>
+                    <p>${transaction.amount}</p>
+                  </div>
+                </div>
+                <div className="row">
                   <p>
-                    <i class="fa-solid fa-comment"></i> {transaction.notes}
+                    <i class="fa-solid fa-calendar"></i>&nbsp;
+                    {transaction.date.slice(0, 10)}
                   </p>
-                ) : null}
+                  <p>
+                    <i class="fa-solid fa-folder"></i>&nbsp;
+                    {transaction.category}
+                  </p>
+                  <p>
+                    <i class="fa-solid fa-receipt"></i>&nbsp;
+                    {transaction.account}
+                  </p>
+                  {transaction.notes ? (
+                    <p>
+                      <i class="fa-solid fa-comment"></i>&nbsp;
+                      {transaction.notes}
+                    </p>
+                  ) : null}
+                </div>
               </div>
             ))}
         </ul>

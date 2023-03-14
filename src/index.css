@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap");
 
 * {
   box-sizing: border-box;
@@ -7,7 +7,7 @@
 body {
   margin: 0;
   padding: 0;
-  font: 15px 'Poppins', Helvetica, Arial, sans-serif;
+  font: 15px "Poppins", Helvetica, Arial, sans-serif;
   font-weight: 400;
   line-height: 1.7;
   letter-spacing: 0.2px;
@@ -67,7 +67,7 @@ a {
 }
 
 button {
-  font: 15px 'Poppins', Helvetica, Arial, sans-serif;
+  font: 15px "Poppins", Helvetica, Arial, sans-serif;
   border: none;
   border-radius: 200px;
   background-color: rgb(43, 43, 43);
@@ -84,19 +84,42 @@ ul {
   padding: 0;
 }
 
-select, input[type="date"] {
-  font: 13px 'Poppins', Helvetica, Arial, sans-serif;
+select,
+input[type="date"] {
+  font: 13px "Poppins", Helvetica, Arial, sans-serif;
   padding: 3px;
 }
 
 .card {
   display: flex;
   flex-direction: column;
+  justify-content: space-between;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.164);
   padding: 10px;
   gap: 10px;
   margin: 10px 0px;
   border-radius: 8px;
+  position: relative;
+}
+
+.green-bar {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 5px;
+  border-radius: 8px;
+  background-color: #40b94a;
+}
+
+.red-bar {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 5px;
+  border-radius: 8px;
+  background-color: #eb3c3c;
 }
 
 .add-btn {
