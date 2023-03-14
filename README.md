@@ -1,18 +1,18 @@
 # Ledgerly Accounting ⚖️ 
 
-Ledgerly Accounting is a full-stack MERN application that provides small-business owners with a comprehensive solution to manage their incomes and expenses.
-With Ledgerly, tax season is a breeze.
+Ledgerly Accounting is a full-stack MERN application that provides small-business owners with a comprehensive solution to manage their incomes and expenses. Handle tax season like a boss with Ledgerly.
+
+<strong>Live Preview: https://ledgerly-accounting.herokuapp.com/</strong>
 
 ## Features
-<ul>
-  <li>Create, read, update, and delete financial transactions</li>
-  <li>Filter transactions by category and date</li>
-  <li>Generate financial reports</li>
-  <li>Secure data storage and token-based user authentication</li>
-  <li>User-friendly interface and accessible for users of all experience levels</li>
-</ul>
 
-## Technologies Used 👩‍💻
+✅&nbsp;&nbsp;&nbsp;Create, read, update, and delete financial transactions<br>
+✅&nbsp;&nbsp;&nbsp;Filter expenses, income, and transactions by category and date range<br>
+✅&nbsp;&nbsp;&nbsp;Generate financial reports<br>
+✅&nbsp;&nbsp;&nbsp;Secure data storage and token-based user authentication<br>
+
+
+## Technologies Used
 <ul>
   <li>MongoDB</li>
   <li>Express.js</li>
@@ -22,6 +22,13 @@ With Ledgerly, tax season is a breeze.
 
 ## Get Started
 
-## Responsive Design 📱
+## Responsive Design
+Ledgerly is not fully responsive yet. Check back soon for updates.
 
 ## What's Next? 🤔
+<ul>
+  <li>Landing page</li>
+  <li>Visual representations of transactions</li>
+  <li>Responsive design for mobile and tablet displays</li>
+  <li>Budgeting tool</li>
+</ul>
