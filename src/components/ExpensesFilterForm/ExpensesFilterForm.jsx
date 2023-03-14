@@ -33,37 +33,34 @@ export default function ExpensesFilterForm({
   }
 
   return (
-    <>
-      <h3>Filter</h3>
-      <form>
-        <label htmlFor="category">Category</label>
-        <select
-          id="category"
-          name="category"
-          value={selectedCategory}
-          onChange={handleCategoryChange}
-        >
-          {categories.map((category, index) => (
-            <option key={category} value={index === 0 ? "" : category}>
-              {category}
-            </option>
-          ))}
-        </select>
-        <label htmlFor="start-date">Start Date</label>
-        <input
-          id="start-date"
-          type="date"
-          value={startDate}
-          onChange={handleStartDateChange}
-        />
-        <label htmlFor="end-date">End Date</label>
-        <input
-          id="end-date"
-          type="date"
-          value={endDate}
-          onChange={handleEndDateChange}
-        />
-      </form>
-    </>
+    <form>
+      <label htmlFor="category">Category</label>
+      <select
+        id="category"
+        name="category"
+        value={selectedCategory}
+        onChange={handleCategoryChange}
+      >
+        {categories.map((category, index) => (
+          <option key={category} value={index === 0 ? "" : category}>
+            {category}
+          </option>
+        ))}
+      </select>
+      <label htmlFor="start-date">Start Date</label>
+      <input
+        id="start-date"
+        type="date"
+        value={startDate}
+        onChange={handleStartDateChange}
+      />
+      <label htmlFor="end-date">End Date</label>
+      <input
+        id="end-date"
+        type="date"
+        value={endDate}
+        onChange={handleEndDateChange}
+      />
+    </form>
   );
 }

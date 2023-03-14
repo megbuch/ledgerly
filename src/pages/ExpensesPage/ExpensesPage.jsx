@@ -105,12 +105,12 @@ export default function ExpensesPage() {
         selectedDateRange={selectedDateRange}
         setSelectedDateRange={setSelectedDateRange}
       />
-      <button onClick={handleToggleModal}>
-        <i class="fa-solid fa-plus"></i> Add Expense
-      </button>
       <div>
         <h3>Your Expenses</h3>
-        <div>
+        <div className="row">
+          <button className="add-btn" onClick={handleToggleModal}>
+            <i class="fa-solid fa-plus"></i> Add Expense
+          </button>
           <p>
             Total Expenses: <strong>- ${totalExpenses}</strong>
           </p>
@@ -118,33 +118,39 @@ export default function ExpensesPage() {
         <ul>
           {filteredExpenses.map((expense) => (
             <div key={expense._id} className="card">
-              <p>
-                <strong>{expense.description}</strong>
-                <span>
-                  <i class="fa-solid fa-dollar-sign"></i> {expense.amount}
-                </span>
-              </p>
-              <p>
-                <i class="fa-solid fa-calendar"></i>
-                {expense.date.slice(0, 10)}
-              </p>
-              <p>
-                <i class="fa-solid fa-folder"></i> {expense.category}
-              </p>
-              <p>
-                <i class="fa-solid fa-receipt"></i> {expense.account}
-              </p>
-              {expense.notes ? (
+              <div className="row">
+                <div className="row">
+                  <p>
+                    <strong>{expense.description}</strong>
+                  </p>
+                  <p>${expense.amount}</p>
+                </div>
+                <div className="edit-delete-btns">
+                  <button onClick={() => handleDelete(expense._id)}>
+                    <i class="fa-solid fa-trash"></i>
+                  </button>
+                  <button onClick={() => handleEdit(expense)}>
+                    <i class="fa-solid fa-pen-to-square"></i>
+                  </button>
+                </div>
+              </div>
+              <div className="row">
                 <p>
-                  <i class="fa-solid fa-comment"></i> {expense.notes}
+                  <i class="fa-solid fa-calendar"></i>&nbsp;
+                  {expense.date.slice(0, 10)}
                 </p>
-              ) : null}
-              <button onClick={() => handleDelete(expense._id)}>
-                <i class="fa-solid fa-trash"></i>
-              </button>
-              <button onClick={() => handleEdit(expense)}>
-                <i class="fa-solid fa-pen-to-square"></i>
-              </button>
+                <p>
+                  <i class="fa-solid fa-folder"></i>&nbsp;{expense.category}
+                </p>
+                <p>
+                  <i class="fa-solid fa-receipt"></i>&nbsp;{expense.account}
+                </p>
+                {expense.notes ? (
+                  <p>
+                    <i class="fa-solid fa-comment"></i>&nbsp;{expense.notes}
+                  </p>
+                ) : null}
+              </div>
             </div>
           ))}
         </ul>

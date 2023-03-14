@@ -106,12 +106,12 @@ export default function IncomesPage() {
         selectedDateRange={selectedDateRange}
         setSelectedDateRange={setSelectedDateRange}
       />
-      <button onClick={handleToggleModal}>
-        <i class="fa-solid fa-plus"></i> Add Income
-      </button>
       <div>
         <h3>Your Income</h3>
-        <div>
+        <div className="row">
+          <button className="add-btn" onClick={handleToggleModal}>
+            <i class="fa-solid fa-plus"></i> Add Income
+          </button>
           <p>
             Total Income: <strong>${totalIncomes}</strong>
           </p>
@@ -119,33 +119,39 @@ export default function IncomesPage() {
         <ul>
           {filteredIncomes.map((income) => (
             <div key={income._id} className="card">
-              <p>
-                <strong>{income.description}</strong>
-                <span>
-                  <i class="fa-solid fa-dollar-sign"></i> {income.amount}
-                </span>
-              </p>
-              <p>
-                <i class="fa-solid fa-calendar"></i>
-                {income.date.slice(0, 10)}
-              </p>
-              <p>
-                <i class="fa-solid fa-folder"></i> {income.category}
-              </p>
-              <p>
-                <i class="fa-solid fa-receipt"></i> {income.account}
-              </p>
-              {income.notes ? (
+              <div className="row">
+                <div className="row">
+                  <p>
+                    <strong>{income.description}</strong>
+                  </p>
+                  <p>${income.amount}</p>
+                </div>
+                <div className="edit-delete-btns">
+                  <button onClick={() => handleDelete(income._id)}>
+                    <i class="fa-solid fa-trash"></i>
+                  </button>
+                  <button onClick={() => handleEdit(income)}>
+                    <i class="fa-solid fa-pen-to-square"></i>
+                  </button>
+                </div>
+              </div>
+              <div className="row">
                 <p>
-                  <i class="fa-solid fa-comment"></i> {income.notes}
+                  <i class="fa-solid fa-calendar"></i>&nbsp;
+                  {income.date.slice(0, 10)}
                 </p>
-              ) : null}
-              <button onClick={() => handleDelete(income._id)}>
-                <i class="fa-solid fa-trash"></i>
-              </button>
-              <button onClick={() => handleEdit(income)}>
-                <i class="fa-solid fa-pen-to-square"></i>
-              </button>
+                <p>
+                  <i class="fa-solid fa-folder"></i>&nbsp;{income.category}
+                </p>
+                <p>
+                  <i class="fa-solid fa-receipt"></i>&nbsp;{income.account}
+                </p>
+                {income.notes ? (
+                  <p>
+                    <i class="fa-solid fa-comment"></i>&nbsp;{income.notes}
+                  </p>
+                ) : null}
+              </div>
             </div>
           ))}
         </ul>
