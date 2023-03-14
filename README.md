@@ -57,6 +57,7 @@ See your net cash flow based on these filters, and generate financial reports of
 ## What's Next? 🤔
 <ul>
   <li>Landing page</li>
+  <li>Edit user profile</li>
   <li>Visual representations of transactions</li>
   <li>Responsive design for mobile and tablet displays</li>
   <li>Budgeting tool</li>
