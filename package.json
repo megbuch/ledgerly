@@ -13,6 +13,7 @@
     "method-override": "^3.0.0",
     "mongoose": "^6.10.1",
     "morgan": "^1.10.0",
+    "node": "^19.7.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-moment": "^1.1.3",
