@@ -72,14 +72,13 @@ export default function TransactionsPage() {
       return true;
     });
 
-    let total = 0;
-    for (let i = 0; i < filteredTransactions.length; i++) {
-      total += filteredTransactions[i].amount;
-    }
-
     setFilteredTransactions(filteredTransactions);
   }, [transactions, selectedCategory, selectedDateRange]);
-
+  
+  let total = 0;
+  for (let i = 0; i < filteredTransactions.length; i++) {
+    total += filteredTransactions[i].amount;
+  }
   const incomeTotal = filteredTransactions
     .filter((transaction) => !transaction.isExpense)
     .reduce((total, transaction) => total + transaction.amount, 0);
