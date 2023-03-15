@@ -4,7 +4,7 @@ import * as expensesAPI from "../../utilities/expenses-api";
 import * as incomesAPI from "../../utilities/incomes-api";
 import TransactionsFilterForm from "../../components/TransactionsFilterForm/TransactionsFilterForm";
 import ReactToPrint from "react-to-print";
-import "./TransactionsPage.css"
+import "./TransactionsPage.css";
 
 export default function TransactionsPage() {
   const [transactions, setTransactions] = useState([]);
@@ -19,16 +19,6 @@ export default function TransactionsPage() {
       categories.push(transactions[i].category);
     }
   }
-
-  const incomeTotal = filteredTransactions
-    .filter((transaction) => !transaction.isExpense)
-    .reduce((total, transaction) => total + transaction.amount, 0);
-
-  const expensesTotal = filteredTransactions
-    .filter((transaction) => transaction.isExpense)
-    .reduce((total, transaction) => total + transaction.amount, 0);
-
-  const cashFlow = incomeTotal - expensesTotal;
 
   useEffect(() => {
     async function fetchTransactions() {
@@ -90,8 +80,18 @@ export default function TransactionsPage() {
     setFilteredTransactions(filteredTransactions);
   }, [transactions, selectedCategory, selectedDateRange]);
 
+  const incomeTotal = filteredTransactions
+    .filter((transaction) => !transaction.isExpense)
+    .reduce((total, transaction) => total + transaction.amount, 0);
+
+  const expensesTotal = filteredTransactions
+    .filter((transaction) => transaction.isExpense)
+    .reduce((total, transaction) => total + transaction.amount, 0);
+
+  const cashFlow = incomeTotal - expensesTotal;
+
   return (
-    <div className="TransactionsPage" ref={componentRef}>
+    <div className="TransactionsPage">
       <div className="row">
         <h1>Transactions</h1>
         <ReactToPrint
@@ -111,7 +111,7 @@ export default function TransactionsPage() {
         selectedDateRange={selectedDateRange}
         setSelectedDateRange={setSelectedDateRange}
       />
-      <div>
+      <div ref={componentRef}>
         <h3>Your Transactions</h3>
         <div className="row">
           <p>
@@ -128,67 +128,41 @@ export default function TransactionsPage() {
           </p>
         </div>
         <ul>
-          {transactions
-            .filter((transaction) => {
-              if (
-                selectedCategory !== "" &&
-                transaction.category !== selectedCategory
-              ) {
-                return false;
-              }
-
-              if (
-                selectedDateRange.startDate !== "" &&
-                selectedDateRange.endDate !== ""
-              ) {
-                const transactionDate = new Date(transaction.date);
-                const startDate = new Date(selectedDateRange.startDate);
-                const endDate = new Date(selectedDateRange.endDate);
-
-                if (transactionDate < startDate || transactionDate > endDate) {
-                  return false;
-                }
-              }
-
-              return true;
-            })
-            .map((transaction) => (
-              <div key={transaction._id} className="card">
-                <div
-                  className={`${
-                    transaction.isExpense ? "red-bar" : "green-bar"
-                  }`}
-                ></div>
-                <div className="row">
-                  <div className="row">
-                    <p>
-                      <strong>{transaction.description}</strong>
-                    </p>
-                    <p>${transaction.amount}</p>
-                  </div>
-                </div>
+          {filteredTransactions.map((transaction) => (
+            <div key={transaction._id} className="card">
+              <div
+                className={`${transaction.isExpense ? "red-bar" : "green-bar"}`}
+              ></div>
+              <div className="row">
                 <div className="row">
                   <p>
-                    <i class="fa-solid fa-calendar"></i>&nbsp;
-                    {transaction.date.slice(0, 10)}
+                    <strong>{transaction.description}</strong>
                   </p>
-                  <p>
-                    <i class="fa-solid fa-folder"></i>&nbsp;
-                    {transaction.category}
-                  </p>
-                  <p>
-                    <i class="fa-solid fa-receipt"></i>&nbsp;
-                    {transaction.account}
-                  </p>
-                  {transaction.notes ? (
-                    <p>
-                      <i class="fa-solid fa-comment"></i>&nbsp;
-                      {transaction.notes}
-                    </p>
-                  ) : null}
+                  <p>${transaction.amount}</p>
                 </div>
               </div>
-            ))}
+              <div className="row">
+                <p>
+                  <i class="fa-solid fa-calendar"></i>&nbsp;
+                  {transaction.date.slice(0, 10)}
+                </p>
+                <p>
+                  <i class="fa-solid fa-folder"></i>&nbsp;
+                  {transaction.category}
+                </p>
+                <p>
+                  <i class="fa-solid fa-receipt"></i>&nbsp;
+                  {transaction.account}
+                </p>
+                {transaction.notes ? (
+                  <p>
+                    <i class="fa-solid fa-comment"></i>&nbsp;
+                    {transaction.notes}
+                  </p>
+                ) : null}
+              </div>
+            </div>
+          ))}
         </ul>
       </div>
     </div>

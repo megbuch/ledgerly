@@ -28,7 +28,7 @@ async function create(req, res) {
 async function index(req, res) {
   try {
     const expenses = await Expense.find({ user: req.user._id }).sort({
-      createdAt: -1,
+      date: -1,
     });
     res.json(expenses);
   } catch (error) {

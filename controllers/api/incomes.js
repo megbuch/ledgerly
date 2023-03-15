@@ -29,7 +29,7 @@ async function create(req, res) {
 async function index(req, res) {
   try {
     const incomes = await Income.find({ user: req.user._id }).sort({
-      createdAt: -1,
+      date: -1,
     });
     res.json(incomes);
   } catch (error) {
@@ -47,7 +47,6 @@ async function deleteIncome(req, res) {
       return res.status(404).json({ error: "Income not found" });
     }
     res.json({
-      success: true,
       message: "Income deleted successfully",
       income: deletedIncome,
     });

@@ -11,6 +11,7 @@ export default function ExpensesPage() {
   const [selectedCategory, setSelectedCategory] = useState("");
   const [selectedDateRange, setSelectedDateRange] = useState({});
   const [totalExpenses, setTotalExpenses] = useState(0);
+  const [filteredExpenses, setFilteredExpenses] = useState([]);
 
   const categories = ["All Categories"];
   for (let i = 0; i < expenses.length; i++) {
@@ -54,12 +55,6 @@ export default function ExpensesPage() {
       return true;
     });
 
-    filteredExpenses.sort((a, b) => {
-      const dateA = new Date(a.date);
-      const dateB = new Date(b.date);
-      return dateB - dateA;
-    });
-
     let total = 0;
     for (let i = 0; i < filteredExpenses.length; i++) {
       total += filteredExpenses[i].amount;
@@ -67,8 +62,6 @@ export default function ExpensesPage() {
     setTotalExpenses(total);
     setFilteredExpenses(filteredExpenses);
   }, [expenses, selectedCategory, selectedDateRange]);
-
-  const [filteredExpenses, setFilteredExpenses] = useState([]);
 
   async function addExpense(expense) {
     setExpenses((prevExpenses) => [...prevExpenses, expense]);

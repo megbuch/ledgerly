@@ -11,6 +11,7 @@ export default function IncomesPage() {
   const [selectedCategory, setSelectedCategory] = useState("");
   const [selectedDateRange, setSelectedDateRange] = useState({});
   const [totalIncomes, setTotalIncomes] = useState(0);
+  const [filteredIncomes, setFilteredIncomes] = useState([]);
 
   const categories = ["All Categories"];
   for (let i = 0; i < incomes.length; i++) {
@@ -54,12 +55,6 @@ export default function IncomesPage() {
       return true;
     });
 
-    filteredIncomes.sort((a, b) => {
-      const dateA = new Date(a.date);
-      const dateB = new Date(b.date);
-      return dateB - dateA;
-    });
-
     let total = 0;
     for (let i = 0; i < filteredIncomes.length; i++) {
       total += filteredIncomes[i].amount;
@@ -68,8 +63,6 @@ export default function IncomesPage() {
 
     setFilteredIncomes(filteredIncomes);
   }, [incomes, selectedCategory, selectedDateRange]);
-
-  const [filteredIncomes, setFilteredIncomes] = useState([]);
 
   async function addIncome(income) {
     setIncomes((prevIncomes) => [...prevIncomes, income]);
