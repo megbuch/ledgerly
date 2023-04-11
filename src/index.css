@@ -24,6 +24,12 @@ h1 {
   font-size: 1.3rem;
 }
 
+.heading {
+  font-size: 2rem;
+  margin: 0.3rem;
+  text-align: center;
+}
+
 h2 {
   font-weight: 100;
 }
@@ -263,5 +269,52 @@ button[type="submit"] {
 
   .expanded {
     display: flex;
+  }
+}
+
+@media screen and (max-width: 1000px) {
+  h1,
+  #print {
+    font-size: 0.8rem;
+    text-align: center;
+  }
+
+  #print {
+    display: block;
+  }
+
+  .filter-form {
+    flex-direction: column;
+  }
+
+  .filter-form > div {
+    display: block;
+    width: 100%;
+    text-align: center;
+  }
+
+  #category {
+    width: 100%;
+  }
+
+  #start-date,
+  #end-date {
+    width: 97%;
+  }
+
+  .large {
+    font-size: 1.2rem;
+  }
+}
+
+@media screen and (max-width: 800px) {
+  .row {
+    gap: 1em;
+  }
+}
+
+@media screen and (max-width: 380px) {
+  h1 {
+    font-size: 0.7rem;
   }
 }

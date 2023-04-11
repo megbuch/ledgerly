@@ -1,5 +1,5 @@
 .App {
   display: flex;
-  gap: 3em;
   background: linear-gradient(to top left, rgb(20, 20, 20), rgb(34, 34, 34));
+  min-height: 100vh;
 }

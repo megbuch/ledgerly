@@ -105,6 +105,7 @@ export default function ExpensesPage() {
 
   return (
     <div className="ExpensesPage">
+      <h1 className="heading">Expenses</h1>
       <div className="row">
         <h1>
           Total Expenses: <span>${totalExpenses}</span>

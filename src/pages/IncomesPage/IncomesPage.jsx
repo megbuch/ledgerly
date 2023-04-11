@@ -105,7 +105,8 @@ export default function IncomesPage() {
   }
 
   return (
-    <div className="IncomePage">
+    <div className="IncomesPage">
+      <h1 className="heading">Income</h1>
       <div className="row">
         <h1>
           Total Income: <span>${totalIncomes}</span>

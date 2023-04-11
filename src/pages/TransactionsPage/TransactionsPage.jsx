@@ -101,18 +101,19 @@ export default function TransactionsPage() {
 
   return (
     <div className="TransactionsPage" ref={componentRef}>
+      <h1 className="heading">Transactions</h1>
       <div className="row">
-        <h1>
-          Cash Flow:{" "}
-          <span className={`${cashFlow <= 0 ? "red" : "green"}`}>
-            ${cashFlow}
-          </span>
-        </h1>
         <h1>
           Income: <span>${incomeTotal}</span>
         </h1>
         <h1>
           Expenses: <span>${expensesTotal}</span>
+        </h1>
+        <h1>
+          Cash Flow:{" "}
+          <span className={`${cashFlow <= 0 ? "red" : "green"}`}>
+            ${cashFlow}
+          </span>
         </h1>
         <ReactToPrint
           trigger={() => (

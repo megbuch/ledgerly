@@ -1,6 +1,20 @@
-.IncomePage {
+.IncomesPage {
   display: flex;
   flex-direction: column;
-  width: 40%;
-  margin: 2em 3em;
+  margin: 2em auto;
+  width: 50vw;
+}
+
+@media screen and (max-width: 1000px) {
+  .IncomesPage {
+    margin: 5em auto;
+    width: 60vw;
+  }
+}
+
+@media screen and (max-width: 650px) {
+  .IncomesPage {
+    margin: 5em auto;
+    width: 90vw;
+  }
 }

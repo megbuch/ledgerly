@@ -1,57 +1,106 @@
 @import url("https://fonts.googleapis.com/css2?family=Berkshire+Swash&display=swap");
 
-.Navigation > a {
-  color: white;
-  font-size: 1.2em;
-  padding-right: 1em;
-  border-right: 2px solid transparent;
-}
-
-.Navigation > a:hover {
+.ledgerly {
+  font-size: 5em;
+  font-weight: 100;
+  letter-spacing: -1px;
+  margin: 0;
   color: #d9ff7f;
 }
 
-.Navigation > a:focus {
-  color: #d9ff7f;
-  border-right: 2px solid #d9ff7f;
+.hidden {
+  display: none;
 }
 
 nav {
   display: flex;
   flex-direction: column;
-  gap: 15em;
   min-height: 100vh;
-  min-width: 30%;
-  margin: 0;
+  width: 20vw;
+  padding: 5em;
+  gap: 10em;
   text-align: right;
-  padding: 2em 4em;
   background-color: rgb(26, 26, 26);
   color: white;
 }
 
-.Navigation {
+.nav-links {
   display: flex;
   flex-direction: column;
-  gap: 1em;
+  gap: 2em;
 }
 
-.Navigation > h1,
-.Navigation > h3 {
-  text-align: right;
-  margin: 0;
+.nav-links > a {
+  text-transform: lowercase;
+  color: white;
+  font-size: 1.2em;
 }
 
-.Navigation > h1 {
+.nav-links > a:hover {
   color: #d9ff7f;
-  font: 4rem "Berkshire Swash", "Poppins", Helvetica, Arial, sans-serif;
+  border-right: 3px solid transparent;
 }
 
-.Navigation > h3 {
-  font-size: 1em;
-  font-weight: 300;
+.hamburger {
+  display: none;
 }
 
-hr {
-  width: 100%;
-  border: 1px solid rgb(75, 75, 75);
+@media screen and (max-width: 1340px) {
+  .ledgerly {
+    font-size: 2.5rem;
+  }
+
+  nav > div > h1 {
+    font-size: 2em;
+  }
+
+  nav {
+    width: 20vw;
+    padding: 5em 2em;
+  }
+}
+
+@media screen and (max-width: 650px) {
+  nav > div > h1 {
+    display: none;
+  }
+
+  nav {
+    display: none;
+  }
+
+  body {
+    overflow: hidden;
+  }
+
+  nav.open {
+    display: flex;
+    width: 60vw;
+    height: 40vh;
+    position: absolute;
+    top: 0;
+    right: 0;
+    background: linear-gradient(to top, rgb(17, 17, 17), rgb(12, 12, 12));
+    z-index: 2;
+  }
+
+  .nav-links > a {
+    font-size: 1.8em;
+    border-right: 2px solid transparent;
+  }
+
+  .hamburger {
+    font-size: 1.8rem;
+    display: block;
+    position: absolute;
+    position: fixed;
+    top: 1em;
+    right: 1em;
+    z-index: 3;
+  }
+
+  .hidden {
+    font-size: 3rem;
+    display: block;
+  }
 }
