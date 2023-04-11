@@ -1,5 +1,9 @@
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap");
 
+* {
+  box-sizing: border-box;
+}
+
 body,
 textarea {
   margin: 0;
@@ -224,10 +228,12 @@ input[type="date"] {
 #date,
 #account,
 #notes {
+  display: block;
   padding: 7px;
   font-size: 0.9rem;
   border-radius: 8px;
   border: 1px solid rgb(230, 230, 230);
+  width: 100%;
 }
 
 form {
@@ -311,8 +317,13 @@ button[type="submit"] {
   }
 
   #start-date,
-  #end-date {
-    width: 97%;
+  #end-date,
+  #description,
+  #amount,
+  #date,
+  #account,
+  #notes {
+    display: block;
   }
 
   .large {
