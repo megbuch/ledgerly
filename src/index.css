@@ -335,6 +335,36 @@ button[type="submit"] {
   .row {
     gap: 1em;
   }
+
+  /* .expanded {
+    flex-flow: row;
+    justify-content: left;
+    text-align: left;
+    margin: 0;
+  } */
+}
+
+@media screen and (max-width: 600px) {
+  .expanded > p,
+  .edit-delete-btns {
+    width: 100%;
+  }
+
+  .expanded {
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .edit-delete-btns {
+    justify-content: center;
+    gap: 20px;
+  }
+
+  .edit-delete-btns > button {
+    padding: 8px;
+    width: 45%;
+  }
 }
 
 @media screen and (max-width: 380px) {
