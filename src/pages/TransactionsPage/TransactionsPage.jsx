@@ -11,6 +11,7 @@ export default function TransactionsPage() {
   const [selectedCategory, setSelectedCategory] = useState("");
   const [selectedDateRange, setSelectedDateRange] = useState({});
   const [filteredTransactions, setFilteredTransactions] = useState([]);
+  const [expandedCard, setExpandedCard] = useState(null);
   const componentRef = useRef(null);
 
   const categories = ["All Categories"];
@@ -74,11 +75,12 @@ export default function TransactionsPage() {
 
     setFilteredTransactions(filteredTransactions);
   }, [transactions, selectedCategory, selectedDateRange]);
-  
+
   let total = 0;
   for (let i = 0; i < filteredTransactions.length; i++) {
     total += filteredTransactions[i].amount;
   }
+
   const incomeTotal = filteredTransactions
     .filter((transaction) => !transaction.isExpense)
     .reduce((total, transaction) => total + transaction.amount, 0);
@@ -89,15 +91,33 @@ export default function TransactionsPage() {
 
   const cashFlow = incomeTotal - expensesTotal;
 
+  function handleCardClick(id) {
+    if (expandedCard === id) {
+      setExpandedCard(null);
+    } else {
+      setExpandedCard(id);
+    }
+  }
+
   return (
-    <div className="TransactionsPage">
+    <div className="TransactionsPage" ref={componentRef}>
       <div className="row">
-        <h1>Transactions</h1>
+        <h1>
+          Cash Flow:{" "}
+          <span className={`${cashFlow <= 0 ? "red" : "green"}`}>
+            ${cashFlow}
+          </span>
+        </h1>
+        <h1>
+          Income: <span>${incomeTotal}</span>
+        </h1>
+        <h1>
+          Expenses: <span>${expensesTotal}</span>
+        </h1>
         <ReactToPrint
           trigger={() => (
-            <button className="add-btn">
-              Generate Financial Report&nbsp;&nbsp;
-              <i class="fa-solid fa-print"></i>
+            <button id="print">
+              Print PDF&nbsp;&nbsp;<i class="fa-solid fa-print"></i>
             </button>
           )}
           content={() => componentRef.current}
@@ -110,41 +130,32 @@ export default function TransactionsPage() {
         selectedDateRange={selectedDateRange}
         setSelectedDateRange={setSelectedDateRange}
       />
-      <div ref={componentRef}>
-        <h3>Your Transactions</h3>
-        <div className="row">
-          <p>
-            Income: <strong>${incomeTotal}</strong>
-          </p>
-          <p>
-            Expenses: <strong>${expensesTotal}</strong>
-          </p>
-          <p>
-            Cash Flow:{" "}
-            <strong style={{ color: cashFlow <= 0 ? "#eb3c3c" : "#40b94a" }}>
-              ${cashFlow}
-            </strong>
-          </p>
-        </div>
-        <ul>
+      <div>
+        <ul className="cards-ctr">
           {filteredTransactions.map((transaction) => (
-            <div key={transaction._id} className="card">
+            <div
+              key={transaction._id}
+              onClick={() => handleCardClick(transaction._id)}
+              className={`card ${
+                expandedCard === transaction._id ? "card-expanded" : ""
+              }`}
+            >
               <div
                 className={`${transaction.isExpense ? "red-bar" : "green-bar"}`}
               ></div>
               <div className="row">
-                <div className="row">
-                  <p>
-                    <strong>{transaction.description}</strong>
-                  </p>
-                  <p>${transaction.amount}</p>
+                <div className="card-main row">
+                  <div>
+                    <p className="large">{transaction.description}</p>
+                    <p>
+                      <i class="fa-solid fa-calendar"></i>&nbsp;
+                      {transaction.date.slice(0, 10)}
+                    </p>
+                  </div>
+                  <p className="large">${transaction.amount}</p>
                 </div>
               </div>
-              <div className="row">
-                <p>
-                  <i class="fa-solid fa-calendar"></i>&nbsp;
-                  {transaction.date.slice(0, 10)}
-                </p>
+              <div className="row expanded">
                 <p>
                   <i class="fa-solid fa-folder"></i>&nbsp;
                   {transaction.category}

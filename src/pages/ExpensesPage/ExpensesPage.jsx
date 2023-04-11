@@ -12,6 +12,7 @@ export default function ExpensesPage() {
   const [selectedDateRange, setSelectedDateRange] = useState({});
   const [totalExpenses, setTotalExpenses] = useState(0);
   const [filteredExpenses, setFilteredExpenses] = useState([]);
+  const [expandedCard, setExpandedCard] = useState(null);
 
   const categories = ["All Categories"];
   for (let i = 0; i < expenses.length; i++) {
@@ -94,11 +95,21 @@ export default function ExpensesPage() {
     setShowModal(true);
   }
 
+  function handleCardClick(id) {
+    if (expandedCard === id) {
+      setExpandedCard(null);
+    } else {
+      setExpandedCard(id);
+    }
+  }
+
   return (
     <div className="ExpensesPage">
       <div className="row">
-        <h1>Expenses</h1>
-        <button className="add-btn" onClick={handleToggleModal}>
+        <h1>
+          Total Expenses: <span>${totalExpenses}</span>
+        </h1>
+        <button onClick={handleToggleModal}>
           <i class="fa-solid fa-plus"></i> Add Expense
         </button>
       </div>
@@ -110,37 +121,29 @@ export default function ExpensesPage() {
         setSelectedDateRange={setSelectedDateRange}
       />
       <div>
-        <div className="row">
-          <h3>Your Expenses</h3>
-          <p>
-            Total Expenses: <strong>${totalExpenses}</strong>
-          </p>
-        </div>
-        <ul>
+        <ul className="cards-ctr">
           {filteredExpenses.map((expense) => (
-            <div key={expense._id} className="card">
+            <div
+              key={expense._id}
+              onClick={() => handleCardClick(expense._id)}
+              className={`card ${
+                expandedCard === expense._id ? "card-expanded" : ""
+              }`}
+            >
               <div className="red-bar"></div>
               <div className="row">
-                <div className="row">
-                  <p>
-                    <strong>{expense.description}</strong>
-                  </p>
-                  <p>${expense.amount}</p>
-                </div>
-                <div className="edit-delete-btns">
-                  <button onClick={() => handleDelete(expense._id)}>
-                    <i class="fa-solid fa-trash"></i>
-                  </button>
-                  <button onClick={() => handleEdit(expense)}>
-                    <i class="fa-solid fa-pen-to-square"></i>
-                  </button>
+                <div className="card-main row">
+                  <div>
+                    <p className="large">{expense.description}</p>
+                    <p>
+                      <i class="fa-solid fa-calendar"></i>&nbsp;
+                      {expense.date.slice(0, 10)}
+                    </p>
+                  </div>
+                  <p className="large">${expense.amount}</p>
                 </div>
               </div>
-              <div className="row">
-                <p>
-                  <i class="fa-solid fa-calendar"></i>&nbsp;
-                  {expense.date.slice(0, 10)}
-                </p>
+              <div className="row expanded">
                 <p>
                   <i class="fa-solid fa-folder"></i>&nbsp;{expense.category}
                 </p>
@@ -152,6 +155,14 @@ export default function ExpensesPage() {
                     <i class="fa-solid fa-comment"></i>&nbsp;{expense.notes}
                   </p>
                 ) : null}
+                <div className="edit-delete-btns">
+                  <button onClick={() => handleDelete(expense._id)}>
+                    <i class="fa-solid fa-trash"></i>
+                  </button>
+                  <button onClick={() => handleEdit(expense)}>
+                    <i class="fa-solid fa-pen-to-square"></i>
+                  </button>
+                </div>
               </div>
             </div>
           ))}

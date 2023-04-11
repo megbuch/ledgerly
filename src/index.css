@@ -1,16 +1,13 @@
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap");
 
-* {
-  box-sizing: border-box;
-}
-
 body {
   margin: 0;
   padding: 0;
-  font: 15px "Poppins", Helvetica, Arial, sans-serif;
-  font-weight: 400;
+  font: 13px "Poppins", Helvetica, Arial, sans-serif;
+  font-weight: 300;
   line-height: 1.7;
-  letter-spacing: 0.2px;
+  color: white;
+  letter-spacing: 1px;
 }
 
 p {
@@ -23,15 +20,16 @@ a {
 }
 
 h1 {
-  font-weight: 500;
+  font-weight: 200;
+  font-size: 1.3rem;
 }
 
-h3 {
+h2 {
+  font-weight: 100;
+}
+
+span {
   font-weight: 400;
-}
-
-strong {
-  font-weight: 600;
 }
 
 .modal {
@@ -76,6 +74,11 @@ strong {
   justify-content: space-between;
   align-items: center;
   gap: 20px;
+  width: 100%;
+}
+
+.expanded {
+  display: none;
 }
 
 button {
@@ -84,12 +87,14 @@ button {
   border-radius: 20px;
   background-color: rgb(43, 43, 43);
   color: white;
-  padding: 1px 6px;
+  height: 70%;
+  padding: 0px 15px;
+  transition: 200ms ease-in-out;
 }
 
 button:hover {
   cursor: pointer;
-  background-color: rgb(17, 17, 17);
+  background-color: #b0d454c0;
 }
 
 ul {
@@ -101,16 +106,52 @@ input[type="date"] {
   font: 13px "Poppins", Helvetica, Arial, sans-serif;
 }
 
+.cards-ctr {
+  margin: 1.5em 0;
+}
+
 .card {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  background-color: rgba(255, 255, 255, 0.116);
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.164);
   padding: 10px 15px;
   gap: 10px;
-  margin: 10px 0px;
+  margin: 10px 0;
   border-radius: 8px;
   position: relative;
+  top: 0;
+  transition: 100ms ease-in;
+}
+
+.card:hover,
+.card:focus,
+.card:active {
+  top: -3px;
+  background-color: rgba(255, 255, 255, 0.267);
+  cursor: pointer;
+}
+
+.card-main {
+  width: 100%;
+}
+
+.large {
+  font-size: 1.5rem;
+  text-transform: lowercase;
+  font-weight: 300;
+}
+
+.card-expanded .expanded {
+  display: flex;
+}
+
+.card-title {
+  font-size: 1rem;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
 }
 
 .green-bar {
@@ -120,7 +161,11 @@ input[type="date"] {
   height: 100%;
   width: 5px;
   border-radius: 8px;
-  background-color: #40b94a;
+  background-color: #d9ff7f;
+}
+
+.green {
+  color: #d9ff7f;
 }
 
 .red-bar {
@@ -130,16 +175,40 @@ input[type="date"] {
   height: 100%;
   width: 5px;
   border-radius: 8px;
-  background-color: #eb3c3c;
+  background-color: #ff7575;
 }
 
-.add-btn {
-  padding: 8px 25px;
+.red {
+  color: #ff7575;
 }
 
 .edit-delete-btns {
   display: flex;
   gap: 5px;
+}
+.edit-delete-btns > button {
+  padding: 2px 7px;
+}
+
+.filter-form {
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.filter-form > div {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+#start-date,
+#end-date,
+#category {
+  padding: 7px;
+  font-size: 0.9rem;
+  border-radius: 8px;
+  border: none;
 }
 
 form {
@@ -162,9 +231,37 @@ select {
   line-height: 1.3;
 }
 
-
 button[type="submit"] {
   padding: 8px;
   margin: 1em 0em;
 }
 
+@media print {
+  @page {
+    size: A4 portrait;
+    margin: 10mm;
+  }
+
+  body {
+    color: black;
+    width: 100vw;
+  }
+
+  .red,
+  .green {
+    color: black;
+  }
+
+  .row,
+  .filter-form {
+    width: 100vw;
+  }
+
+  .card {
+    width: 110vw;
+  }
+
+  .expanded {
+    display: flex;
+  }
+}
