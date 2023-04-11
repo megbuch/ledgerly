@@ -122,6 +122,7 @@ export default function ExpenseForm({
         />
         <label htmlFor="amount">Amount</label>
         <input
+          placeholder="$"
           type="number"
           id="amount"
           name="amount"

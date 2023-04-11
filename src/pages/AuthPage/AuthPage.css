@@ -1,36 +1,51 @@
 .AuthPage {
-    width: 100%;
-    height: 100vh;
-    background-color: rgb(43, 43, 43);
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    margin: 0 auto;
-    text-align: center;
-    color: white;
-  }
+  width: 100%;
+  height: 100vh;
+  background-color: rgb(43, 43, 43);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin: 0 auto;
+  text-align: center;
+  color: white;
+}
 
 .AuthPage > main > h1,
 .AuthPage > main > h3 {
-    margin: 10px;
+  margin: 10px;
+  font-weight: 200;
 }
 
 .AuthPage > main > h1 {
-    font-weight: 400;
+  font-weight: 400;
 }
 
 .AuthPage > main > a {
-    color: white;
+  color: white;
 }
 
 .AuthPage > main > a:hover {
-    color: #d9ff7f;
+  color: #d9ff7f;
 }
 
 .ledgerly {
-    color: #d9ff7f;
-    font: 4rem "Berkshire Swash", "Poppins", Helvetica, Arial, sans-serif;
-  }
+  color: #d9ff7f;
+  font: 4rem "Berkshire Swash", "Poppins", Helvetica, Arial, sans-serif;
+}
 
+input[name="email"],
+input[name="password"],
+input[name="confirm"],
+input[name="businessName"],
+input[name="name"] {
+  padding: 7px;
+  font-family: "Poppins", Helvetica, Arial, sans-serif;
+  font-size: 0.9rem;
+  border-radius: 8px;
+  border: 1px solid rgb(230, 230, 230);
+}
 
+.LoginForm > form > label {
+  font-weight: 500;
+}

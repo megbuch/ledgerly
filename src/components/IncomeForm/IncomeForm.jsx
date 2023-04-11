@@ -121,6 +121,7 @@ export default function IncomeForm({
         />
         <label htmlFor="amount">Amount</label>
         <input
+          placeholder="$"
           type="number"
           id="amount"
           name="amount"
@@ -137,7 +138,7 @@ export default function IncomeForm({
           required
         >
           <option value="" disabled>
-            Select a Category
+            Select a category
           </option>
           {["Sales", "Uncategorized Income"].map((category) => (
             <option key={category} value={category}>
