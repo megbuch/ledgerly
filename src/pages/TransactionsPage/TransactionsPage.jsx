@@ -76,8 +76,8 @@ export default function TransactionsPage() {
     setFilteredTransactions(filteredTransactions);
   }, [transactions, selectedCategory, selectedDateRange]);
 
-  let total = 0;
   for (let i = 0; i < filteredTransactions.length; i++) {
+    let total = 0;
     total += filteredTransactions[i].amount;
   }
 

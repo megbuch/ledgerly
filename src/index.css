@@ -4,6 +4,10 @@
   box-sizing: border-box;
 }
 
+body {
+  height: 100%;
+}
+
 body,
 textarea {
   margin: 0;
@@ -261,6 +265,19 @@ button[type="submit"] {
   margin: 1em 0em;
 }
 
+.container {
+  display: flex;
+  width: 100vw;
+}
+
+a {
+  color: white;
+}
+
+a:hover {
+  color: #d9ff7f;
+}
+
 @media print {
   @page {
     size: A4 portrait;
@@ -335,13 +352,6 @@ button[type="submit"] {
   .row {
     gap: 1em;
   }
-
-  /* .expanded {
-    flex-flow: row;
-    justify-content: left;
-    text-align: left;
-    margin: 0;
-  } */
 }
 
 @media screen and (max-width: 600px) {

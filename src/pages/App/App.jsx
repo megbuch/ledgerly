@@ -8,27 +8,31 @@ import TransactionsPage from "../TransactionsPage/TransactionsPage";
 import IncomesPage from "../IncomesPage/IncomesPage";
 import ExpensesPage from "../ExpensesPage/ExpensesPage";
 import Navigation from "../../components/Navigation/Navigation";
+import LandingPage from "../LandingPage/LandingPage";
 
 export default function App() {
   const [user, setUser] = useState(getUser());
 
   return (
-    <main className="App">
+    <>
       {user ? (
-        <>
+        <main className="App">
           <Navigation user={user} setUser={setUser} />
           <Routes className="Routes">
-            <Route path="/" element={<DashboardPage user={user} />} />
+            <Route path="/dashboard" element={<DashboardPage user={user} />} />
             <Route path="/transactions" element={<TransactionsPage />} />
             <Route path="/income" element={<IncomesPage />} />
             <Route path="/expenses" element={<ExpensesPage />} />
           </Routes>
-        </>
+        </main>
       ) : (
-        <div className="AuthPage">
-          <AuthPage setUser={setUser} />
-        </div>
+        <main className="App">
+          <Routes className="Routes">
+            <Route path="/" element={<LandingPage />} />
+            <Route path="/login" element={<AuthPage setUser={setUser} />} />
+          </Routes>
+        </main>
       )}
-    </main>
+    </>
   );
 }

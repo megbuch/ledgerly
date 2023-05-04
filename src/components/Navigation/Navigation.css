@@ -20,7 +20,9 @@ nav {
   padding: 5em;
   gap: 10em;
   text-align: right;
-  background-color: rgb(26, 26, 26);
+  background-color: rgb(24, 24, 24);
+  border-right: 1px solid #1a1a1a;
+  box-shadow: 0 1px 5px 1px rgba(0, 0, 0, 0.568);
   color: white;
 }
 
@@ -45,9 +47,21 @@ nav {
   display: none;
 }
 
-@media screen and (max-width: 1340px) {
+@media screen and (max-width: 1700px) {
+  .ledgerly {
+    font-size: 2.7rem;
+  }
+}
+
+@media screen and (max-width: 1500px) {
   .ledgerly {
     font-size: 2.5rem;
+  }
+}
+
+@media screen and (max-width: 1300px) {
+  .ledgerly {
+    font-size: 2.2rem;
   }
 
   nav > div > h1 {
@@ -55,7 +69,7 @@ nav {
   }
 
   nav {
-    width: 20vw;
+    width: 30vw;
     padding: 5em 2em;
   }
 }

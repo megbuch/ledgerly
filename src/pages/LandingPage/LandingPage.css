@@ -1,0 +1,166 @@
+.LandingPage {
+  width: 100vw;
+  max-height: 100vh;
+  overflow: hidden;
+}
+
+.hero {
+  width: 100%;
+  height: 100vh;
+  object-fit: cover;
+  position: relative;
+  border-bottom: 1px solid rgb(36, 35, 35);
+}
+
+.LandingPage h1 {
+  font-size: 9rem;
+}
+
+.LandingPage h2 {
+  font-size: 2rem;
+  font-weight: 300;
+}
+
+.LandingPage a {
+  font-size: 1.2rem;
+  font-weight: 200;
+  margin-bottom: 2rem;
+}
+
+.text-container {
+  width: 100%;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.808);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  z-index: 2;
+}
+
+.about {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  width: 100vw;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2rem;
+  gap: 5rem;
+}
+
+.info-card {
+  background: linear-gradient(to top, #0f0f0fd8, #171a1796);
+  color: #fff;
+  width: 18rem;
+  height: 10rem;
+  padding: 1rem 2rem;
+  border-radius: 8px;
+  border: 1px solid #272727;
+  box-shadow: 0 1px 5px 1px rgba(0, 0, 0, 0.568);
+  margin: 0.5rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+.info-card h3 {
+  font-size: 1rem;
+  font-weight: 400;
+  margin: 0.5rem 0;
+}
+
+.info-card p {
+  font-size: 0.8rem;
+  font-weight: 300;
+  margin: 0.5rem 0;
+}
+
+@media only screen and (max-width: 1500px) {
+  .text-container {
+    gap: 0.5rem;
+  }
+
+  .LandingPage h1 {
+    font-size: 6rem;
+  }
+
+  .LandingPage h2 {
+    font-size: 1.3rem;
+  }
+
+  .LandingPage a {
+    font-size: 1rem;
+  }
+
+  .about {
+    gap: 1rem;
+  }
+
+  .info-card {
+    width: 15rem;
+  }
+
+  .info-card h3 {
+    font-size: 0.8rem;
+  }
+
+  .info-card p {
+    font-size: 0.7rem;
+  }
+}
+
+@media only screen and (max-width: 800px) {
+  .LandingPage h1 {
+    font-size: 5rem;
+  }
+
+  .LandingPage h2 {
+    font-size: 1rem;
+  }
+
+  .LandingPage a {
+    font-size: 1rem;
+  }
+
+  .about {
+    gap: 0;
+    flex-direction: column;
+    padding: 0;
+  }
+
+  .info-card {
+    width: 80vw;
+  }
+
+  .info-card h3 {
+    font-size: 0.9rem;
+  }
+
+  .info-card p {
+    font-size: 0.8rem;
+  }
+}
+
+@media only screen and (max-width: 400px) {
+  .LandingPage h1 {
+    font-size: 4rem;
+  }
+
+  .LandingPage h2 {
+    font-size: 0.9rem;
+  }
+
+  .LandingPage a {
+    font-size: 1.2rem;
+  }
+
+  .info-card {
+    height: 8rem;
+  }
+}
