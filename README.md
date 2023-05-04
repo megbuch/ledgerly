@@ -2,7 +2,9 @@
 
 Ledgerly Accounting is a full-stack MERN application that provides small-business owners with a comprehensive solution to manage their incomes and expenses. Handle tax season like a boss with Ledgerly.
 
-<strong>Live Preview: https://ledgerly-accounting.herokuapp.com/</strong>
+<strong>View it here: https://ledgerly.up.railway.app</strong>
+
+<i>Please wait a moment for the server to spin up.</i>
 
 ## Features
 ✅&nbsp;&nbsp;&nbsp;Create, read, update, and delete financial transactions<br>
